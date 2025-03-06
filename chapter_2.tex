@@ -7,31 +7,65 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \chapter{Related Works}
-\label{sec:relatedworks}
+\label{sec:Related Works}
 
-\citet{Pennebaker1999} explored on their study how language use can reflect the personality style of someone. Using a computerized word-based text analysis program, the structure, validity, and reliability of the written language was examined. From there it was found that one's linguistic style is a consequential way to explore personality.
+\section {Single Modal Approaches to APR}
+\label{sec: SMApproaches}
 
-This was further explored in a study by \citet{Mairesse2007} in which the recognition of the Big Five Personality traits (Openness, Conscientiousness, Extroversion, Agreeableness, and Neuroticism) on both text and conversation was first experimented using both self rating and observer ratings of personality. From the experimentation done with the various models: classification, ranking, and regression; the ranking models performed best overall.
+\section{Multimodal Approaches to APR}
+\label{sec: MMApproaches}
+The earliest multimodal APR studies primarily focused on audio and visual features extracted from recorded conversations and behavioral interactions. \citet{Pianesi2008} conducted a study on multimodal behavioral analysis in multi-party meetings, utilizing SVM classifiers to predict Big Five personality traits and Locus of Control based on speech and facial expressions. Their results showed that facial features contributed significantly to extraversion classification, while vocal features were more informative for conscientiousness.
 
-The PagkataoKo dataset analyzed in this paper has been used in the studies of undergraduates, graduates, and professionals at DLSU. These various studies primarily involved modeling Filipino users’ personality traits or Automatic Personality Recognition (APR) through their usage of the Instagram and X (formerly Twitter) social media sites, as was the purpose of the creation of the dataset. 
+Following this, \citet{Sidorov2014} employed a similar audio-visual approach using data from the SEMAINE dataset, which consists of emotionally colored conversations. The study evaluated different segmentation techniques to improve classification accuracy, concluding that shorter segments provided better performance for certain personality traits.
 
-The dataset contains data on Filipino social media users’ social media activity on Instagram and Twitter. This includes features like post images and captions,  profile pictures, follower and following counts, and post count. It also includes the user’s BFI scores.
+Expanding on audio-visual models, \citet{Lima2022} introduced a deep learning approach, incorporating text data alongside audio and visual cues. Their research used Recurrent Neural Networks (RNNs) to process sequential multimodal data, extracting temporal dependencies in social interactions. Their model was trained on 9.1 million parameters, demonstrating the scalability and computational complexity of deep learning-based APR systems.
 
-Among the undergraduate and graduate studies that pursued the analysis of this dataset, the majority of them utilized only the X data, focusing on natural language processing. Techniques such as word embedding models, topic modeling, feature extraction, and other models were used to predict the BFI personality traits of users. One used both X and Instagram, but only the text data was used. There also exists another study that analyzed the visual features of Instagram image data and used this to predict personality traits. Lastly, a published study also used text processing on the X data for the same purpose.
+As social media platforms became a dominant mode of communication, researchers shifted towards analyzing text and image data to infer personality traits. \citet{Machajdik2010} introduced an affective image classification model, which extracted color, texture, and composition-based features to predict emotional responses. Although not directly designed for personality classification, their findings laid the foundation for future studies connecting visual aesthetics with personality traits.
 
-X was a more popular choice for analysis as the platform's main focus is that it is more text-based and the captions hold the most importance whereas on Instagram, it is more secondary. This leaves the Instagram portion of the dataset relatively unexplored compared to the X data, so there is little information about image processing in this dataset. However, this leaves open the potential for exploring images and their relation to personality, specifically the BFI scores, adding to the one research that was done on this topic. 
+\citet{Xianyu2016} extended this approach by introducing a heterogeneity-entropy-based deep learning framework that combined text, images, and social media interactions. Their model used Deep Belief Networks (DBNs) and Autoencoders to extract latent personality features, highlighting how unsupervised learning techniques can capture subtle personality cues across modalities.
 
-Filipinos use social media in many ways. They use it for connecting with other people, sharing information, speaking out, and optimizing productivity \citep{10.1007/978-3-031-61543-6_24}. However, even though they are aware of the presence of social media, \citet{Cruz_Jamias_2013} found that Filipino researchers rarely use social media to their advantage. This demonstrates that each demographic in the Philippines has a different level of social media use.
+\citet{Skowron2016} further refined multimodal approaches by integrating linguistic, visual, and metadata features from Twitter and Instagram. Their study incorporated LIWC for linguistic analysis and emotion detection techniques from Machajdik and Hanbury (2010) to extract visual features. Their findings demonstrated that cross-platform personality modeling improved accuracy, emphasizing that personality traits manifest differently across different social networks.
 
-Social media has many effects in the Philippines. For instance, it plays a role in youth political participation. \citet{Ibardeloza2022-pz} found that social media helps the youth to be more exposed to radical involvement. It also has a positive effect on “peer interpersonal relationships” yet slightly negative on familial relationships \citep{Bristol2016TheDM}.
+Advancements in machine learning-based personality prediction have allowed researchers to refine image and text-based multimodal models for social media applications. \citet{Ferwerda2018} developed a personality recognition model based on Instagram images, utilizing the Google Vision API for image content extraction and a ZeroR classifier for baseline evaluation. Their results indicated that image aesthetics and content types strongly correlate with personality traits, particularly in openness and extraversion classification.
 
-Recent studies have explored the potential of Instagram image data to infer users' personality traits. \citet{ferwerda2016} analyzed features such as hue, brightness, and saturation in users' photos, finding significant correlations between these visual elements and the Big Five personality traits. Their findings suggest that individuals' choices in photo appearance can reflect underlying personality characteristics. 
+Similarly, \citet{Batrinca2016} examined multimodal cues in team-based interactions, incorporating speech, body movements, and facial expressions to model collaborative personality traits. Their study used Hidden Markov Models (HMMs) and SVMs, demonstrating that nonverbal behavior plays a significant role in personality assessments within group settings.
 
-Further research by \citet{Reece2017-qw} utilized machine learning to examine Instagram photos for markers of depression. By analyzing color properties, metadata, and the presence of faces, their model successfully identified depressive indicators, highlighting the platform's potential for mental health screening. 
+\citet{Branz2020} refined the image-based personality recognition model by analyzing color preferences in Instagram photos. Their study confirmed that specific color choices (e.g., dominant red hues) correlated with openness, while blue hues were linked to conscientiousness. The study utilized k-Nearest Neighbors (k-NN) and SVMs, establishing a connection between color psychology and personality traits in digital environments.
 
-Additionally, a study by \citet{Harris2019-gq} investigated the accuracy of personality portrayal on Instagram by comparing observers' perceptions of account holders' personalities with the account holders' self-reported traits. The results indicated discrepancies, suggesting that while certain visual cues can convey personality aspects, they may also lead to misinterpretations. 
+The latest advancements in multimodal APR have shifted toward deep learning-based models, with an emphasis on personalization and adaptive AI techniques. \citet{Salam2022} introduced a personalized personality prediction model, utilizing Neural Architecture Search (NAS) to optimize Deep Neural Networks (DNNs) for different user demographics. Their study found that customized models outperformed generic APR models, reinforcing the importance of personalization in AI-driven personality recognition.
 
-Collectively, these studies underscore the viability of leveraging Instagram image data to assess users' personality traits and mental health status, though they also caution against overreliance on visual cues due to potential misrepresentations.
+Building on deep learning methodologies, \citet{Lima2022} leveraged sequential data modeling to improve real-time personality prediction. Their model incorporated Long Short-Term Memory (LSTM) networks, demonstrating that capturing temporal dependencies enhances classification accuracy. Their research concluded that personality traits are not static but evolve based on user interactions, emphasizing the potential of adaptive AI-driven personality assessments.
+
+\section{Learning Approaches to APR}
+\label{sec: LearningApproaches}
+
+\section{Filipino APR}
+\label{sec: FilipinoAPR}
+
+%Previous draft
+%\citet{Pennebaker1999} explored on their study how language use can reflect the personality style of someone. Using a computerized word-based text analysis program, the structure, validity, and reliability of the written language was examined. From there it was found that one's linguistic style is a consequential way to explore personality.
+
+%This was further explored in a study by \citet{Mairesse2007} in which the recognition of the Big Five Personality traits (Openness, Conscientiousness, Extroversion, Agreeableness, and Neuroticism) on both text and conversation was first experimented using both self rating and observer ratings of personality. From the experimentation done with the various models: classification, ranking, and regression; the ranking models performed best overall.
+
+%The PagkataoKo dataset analyzed in this paper has been used in the studies of undergraduates, graduates, and professionals at DLSU. These various studies primarily involved modeling Filipino users’ personality traits or Automatic Personality Recognition (APR) through their usage of the Instagram and X (formerly Twitter) social media sites, as was the purpose of the creation of the dataset. 
+
+%The dataset contains data on Filipino social media users’ social media activity on Instagram and Twitter. This includes features like post images and captions,  profile pictures, follower and following counts, and post count. It also includes the user’s BFI scores.
+
+%Among the undergraduate and graduate studies that pursued the analysis of this dataset, the majority of them utilized only the X data, focusing on natural language processing. Techniques such as word embedding models, topic modeling, feature extraction, and other models were used to predict the BFI personality traits of users. One used both X and Instagram, but only the text data was used. There also exists another study that analyzed the visual features of Instagram image data and used this to predict personality traits. Lastly, a published study also used text processing on the X data for the same purpose.
+
+%X was a more popular choice for analysis as the platform's main focus is that it is more text-based and the captions hold the most importance whereas on Instagram, it is more secondary. This leaves the Instagram portion of the dataset relatively unexplored compared to the X data, so there is little information about image processing in this dataset. However, this leaves open the potential for exploring images and their relation to personality, specifically the BFI scores, adding to the one research that was done on this topic. 
+
+%Filipinos use social media in many ways. They use it for connecting with other people, sharing information, speaking out, and optimizing productivity \citep{10.1007/978-3-031-61543-6_24}. However, even though they are aware of the presence of social media, \citet{Cruz_Jamias_2013} found that Filipino researchers rarely use social media to their advantage. This demonstrates that each demographic in the Philippines has a different level of social media use.
+
+%Social media has many effects in the Philippines. For instance, it plays a role in youth political participation. \citet{Ibardeloza2022-pz} found that social media helps the youth to be more exposed to radical involvement. It also has a positive effect on “peer interpersonal relationships” yet slightly negative on familial relationships \citep{Bristol2016TheDM}.
+
+%Recent studies have explored the potential of Instagram image data to infer users' personality traits. \citet{ferwerda2016} analyzed features such as hue, brightness, and saturation in users' photos, finding significant correlations between these visual elements and the Big Five personality traits. Their findings suggest that individuals' choices in photo appearance can reflect underlying personality characteristics. 
+
+%Further research by \citet{Reece2017-qw} utilized machine learning to examine Instagram photos for markers of depression. By analyzing color properties, metadata, and the presence of faces, their model successfully identified depressive indicators, highlighting the platform's potential for mental health screening. 
+
+%Additionally, a study by \citet{Harris2019-gq} investigated the accuracy of personality portrayal on Instagram by comparing observers' perceptions of account holders' personalities with the account holders' self-reported traits. The results indicated discrepancies, suggesting that while certain visual cues can convey personality aspects, they may also lead to misinterpretations. 
+
+%Collectively, these studies underscore the viability of leveraging Instagram image data to assess users' personality traits and mental health status, though they also caution against overreliance on visual cues due to potential misrepresentations.
 
 
 %%This chapter provides a synthesis of past research, existing algorithms, and or state-of-the-art software that are related/similar to the thesis. It should not present detailed summaries of each related work, but rather present a cohesive comparison of different aspects of their work. At the end of each section and this chapter, it should be clear what research challenges and opportunities will be focused on for the proposal.
