@@ -1,5 +1,6 @@
-main.aux
-main.fdb_latexmk
-pdflatex22743.fls
-pdflatex22763.fls
-
+*.fdb_latexmk
+*.fls
+*.aux
+*.bbl
+*.pdf
+*.synctex.gz
