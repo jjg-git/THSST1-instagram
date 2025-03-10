@@ -11,6 +11,17 @@
 
 \section {Single Modal Approaches to APR}
 \label{sec: SMApproaches}
+Modalities considered in APR often fall into one of four categories: audio, visual, text, or psychological signals \citep{Zhao2022}. Numerous APR studies have been conducted that focus on a single modality. 
+
+\citet{Ferwerda2016} investigated how picture features of Instagram images can be used to predict personality traits. Features were divided into two groups: visual and content. Visual features included appearance-related qualities such as hue, saturation, value, and the Pleasure-Arousal-Dominance (PAD) model of Valdez and Merhabian. Content features consisted of the number of human faces and full human bodies. For visual features, feature extraction involved categorizing and counting pixels that fell into certain categories (low, mid, and high) for each feature while PAD was applied using its predetermined rules. Content features were extracted using the Viola-Jones algorithm, which was trained on Haar-like features and the AdaBoost classifier to detect human faces. To count full human bodies, the study used Histogram of Oriented Gradient (HOG) features with an SVM classifier, utilizing Matlab’s Computer Vision System Toolbox. Since picture features followed a normal distribution among participants, mean values were calculated and used to generate the correlation matrix via Pearson’s correlation. For prediction, a personality regressor was created and trained on several classifier models on Weka, using RMSE to determine differences between predicted and actual results. 
+
+Building upon prior research, \citet{Ferwerda2018} expanded their previous work by diving deeper into content features. The Google Vision API was used to identify and classify content found in images. K-means clustering was used to group the items and manual categorization was used to form 17 final groups. The number of items per category in a picture was used for personality prediction along with the previously discussed visual features. A similar method was used to create the personality prediction models. 
+
+Focusing on text data, a study by \citet{Christian2021} used natural language processing (NLP) techniques and deep learning models for their APR research. Data was taken from Twitter users. The models BERT, RoBERTa, and XLNet are used to extract contextual meanings from the text in addition to sentiment analysis, Term Frequency-Inverse Gravity Moment (TF-IGM), and an emoticon lexicon database. The study applied model averaging to combine predictions from multiple deep learning models, improving accuracy in personality recognition.
+
+\citet{Xue2021} created a semantic-enhanced personality recognition neural network (SEPRNN) for personality recognition of text data. SEPRNN employs neural networks to capture both contextual and high-level semantic representations of words, which are subsequently used for personality classification.
+
+In another paper by \citet{Deilami2022}, they explored analyzing text data using Convolutional Neural Networks (CNN) with the help of the AdaBoost algorithm. The CNN used filters of varying sizes to extract low-level features, and then put them into their own classifiers. AdaBoost was used to refine CNN-based classifications, aggregate predictions from multiple classifiers, and produce the final result.
 
 \section{Multimodal Approaches to APR}
 \label{sec: MMApproaches}
