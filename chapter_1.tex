@@ -250,7 +250,7 @@ Specific Objective:
 %% --- 1.4 Significance of the Research --- %%
 %%
 
-\section{Significance of the Research}
+\section{Significance of the Study}
 \label{sec: Significance}
 
 To our knowledge, image features in Filipino APR have not been explored yet. Therefore, exploring this would maybe give better insights on how images from Filipino Instagram Users tell their personality.  While existing studies have largely focused on textual data from platforms like Twitter, our study expands the scope by incorporating visual elements from Instagram and fusing these two features: textual data and image data. 
@@ -270,6 +270,181 @@ Apart from benefiting Filipino APR research, this study possibly benefits market
 %%\begin{itemize}
 %%\item  What is the relevance and contribution of your work to the computer science community? 
 
+\section{Research Methodology}
+\label{sec:methodology}
+
+
+Our multimodal personality recognition pipeline employs intermediate fusion to integrate image, text, and metadata features from Filipino Instagram users. The methodology consists of six key phases:
+
+\subsection{Preprocessing}
+\label{subsec:preprocessing}
+
+\begin{itemize}
+	\item \textbf{Data Aggregation:} 
+	\begin{itemize}
+		\item All posts grouped by \texttt{UserID} to create user-level profiles
+		\item Metadata extraction: \texttt{PostCount}, \texttt{Following Count}, and temporal patterns
+	\end{itemize}
+	
+	\item \textbf{Missing Data Handling:}
+	\begin{itemize}
+		\item Posts without captions retained for image-only analysis
+		\item Text features imputed as zero vectors when missing
+		\item Metadata-derived proxies (e.g., \texttt{PostCount} as activity indicator)
+	\end{itemize}
+\end{itemize}
+
+\subsection{Exploratory Data Analysis}
+\label{subsec:eda}
+
+\begin{itemize}
+	\item \textbf{Demographic Analysis:} 
+	\begin{itemize}
+		\item Geographic distribution (Luzon/Visayas/Mindanao)
+		\item Age/gender representation assessment
+	\end{itemize}
+	
+	\item \textbf{Visual Pattern Discovery:}
+	\begin{itemize}
+		\item Color dominance analysis using HSV histograms
+		\item Face detection via OpenCV's Haar cascades
+	\end{itemize}
+	
+	\item \textbf{Temporal Trends:}
+	\begin{itemize}
+		\item Posting time correlation with traits (nocturnal $\rightarrow$ Neuroticism)
+	\end{itemize}
+\end{itemize}
+
+\subsection{Feature Extraction}
+\label{subsec:features}
+
+\begin{itemize}
+	\item \textbf{Image Features:}
+	\begin{itemize}
+		\item \textbf{VGG-19:} Extracts texture/style features (filter usage, composition)
+		\item \textbf{Object Detection:} Leverages existing JSON metadata (group photos $\rightarrow$ Extraversion)
+		\item Color profiles via k-means clustering (HSV space)
+	\end{itemize}
+	
+	\item \textbf{Text Features:}
+	\begin{itemize}
+		\item LIWC categories extended for Tagalog
+		\item Bilingual sentiment analysis (English/Tagalog)
+	\end{itemize}
+	
+	\item \textbf{Metadata Features:}
+	\begin{itemize}
+		\item Behavioral indicators (\texttt{Following Count}, post frequency)
+	\end{itemize}
+\end{itemize}
+
+\subsection{Intermediate Feature Fusion}
+\label{subsec:fusion}
+
+Our hybrid fusion approach combines modalities at the feature level:
+
+\begin{enumerate}
+	\item \textbf{Modality-Specific Encoding:}
+	\begin{itemize}
+		\item Images: VGG-19 embeddings (4,096-D)
+		\item Text: TF-IDF weighted LIWC features
+		\item Metadata: Min-max scaled
+	\end{itemize}
+	
+	\item \textbf{Concatenation:} Unified feature vector per user
+	
+	\item \textbf{Dynamic Weighting:} Attention mechanism prioritizes informative modalities:
+	\begin{itemize}
+		\item Higher weight for images in Openness prediction
+		\item Text prioritized for Neuroticism
+	\end{itemize}
+\end{enumerate}
+
+\subsection{Model Training}
+\label{subsec:models}
+Each model will be trained independently for each feature (single modality) and fused as well (intermediate fusion).
+
+\subsubsection{Support Vector Machines (SVM)}
+\label{subsubsec:svm}
+
+\begin{itemize}
+	\item \textbf{Rationale:}
+	\begin{itemize}
+		\item Effective with high-dimensional fused features \cite{farnadi2018}
+		\item RBF kernel handles non-linear relationships
+		\item Robust to overfitting with medium-sized data
+	\end{itemize}
+	
+	\item \textbf{Implementation:}
+	\begin{itemize}
+		\item Grid search for optimal \texttt{C} and \texttt{gamma}
+		\item Class weights adjusted for trait imbalance
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{XGBoost}
+\label{subsubsec:xgboost}
+
+\begin{itemize}
+	\item \textbf{Rationale:}
+	\begin{itemize}
+		\item Native handling of heterogeneous features \cite{chen2016}
+		\item Built-in feature importance analysis
+		\item Efficient with structured data
+	\end{itemize}
+	
+	\item \textbf{Implementation:}
+	\begin{itemize}
+		\item Early stopping with \texttt{max\_depth=6}
+		\item \texttt{learning\_rate=0.1} with 500 estimators
+	\end{itemize}
+\end{itemize}
+
+
+\subsection{Model Analysis}
+\label{subsec:analysis}
+The metrics below will be used to compare per label the effectiveness of the multimodality approach between the single modality approaches.	 
+
+\begin{itemize}
+	\item \textbf{Evaluation Metrics:}
+	\begin{itemize}
+		\item Macro-F1 (addresses class imbalance)
+		\item AUC-ROC (trait discrimination capability)
+		\item SHAP values for interpretability
+	\end{itemize}
+	
+	\item \textbf{Ablation Studies:}
+	\begin{itemize}
+		\item Modality contribution analysis
+		\item Single vs. fused feature performance
+	\end{itemize}
+\end{itemize}
+
+\section{Ethical Considerations}
+\label{sec:Ethics}
+
+The PagkataoKo dataset’s methods were reviewed and given clearance by the Research Ethics Office of De La Salle University \citep{tighe2022}. 
+
+\begin{itemize}
+	\item \textbf{Data Compliance:}
+		\begin{itemize}
+			\item Volunteers gave electronic consent
+			\item  Social media data was collected in accordance with the developer policies of Twitter and Instagram.
+	\end{itemize}
+	
+	\item \textbf{Privacy Protection:}
+	\begin{itemize}
+		\item Full anonymization of \texttt{UserID} and metadata
+		\item Encrypted storage of raw posts
+	\end{itemize}
+	
+	\item \textbf{Data Restrictions:}
+	\begin{itemize}
+		\item Research-only usage
+		\item No commercial or re-identification purposes
+	\end{itemize}
+\end{itemize}
 %%\begin{itemize} 
 %%\item How does your technical contributions or empirical findings advance the field or grow our body of knowledge? 
 %%\item If you built a prototype of an interaction technique, interface, library, tool, or system, what is value does it add compared to existing solutions? 
