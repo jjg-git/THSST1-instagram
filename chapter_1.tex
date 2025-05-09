@@ -32,17 +32,17 @@ Social media platforms have been used as means of self-expression for users. The
 %%Follow the inverted pyramid to describe each of the following. Allocate one (1) paragraph per level in the pyramid. 
 
 % Describe the research area
-Personality is defined as “patterns of thought, emotion, and behavior” \citep{Vinciarelli2014}. In a society, people develop opinions and treat each other differently based on their perception of the person’s personality. Understanding personality plays a significant role in fields such as psychology as this information can be used in studies of mental health and human behavior. Alongside the rise of publicly available and easily accessible information on social networking sites (SNS), the field of personality computing has begun to garner increasing interest in the last few years. 
-
+Personality is defined as “patterns of thought, emotion, and behavior” \citep{Vinciarelli2014}. In a society, people develop opinions and treat each other differently based on their perception of the person’s personality. Understanding personality plays a significant role in fields such as psychology as this information can be used in studies of mental health and human behavior. 
 %Research area ...
 %This study's main research area is on personality computing. Personality computing is related to artificial intelligence and personality psychology by studying one's personality through a variety of computational techniques from different sources (usually text, multimedia, and social networks). Among the three main problems personality computing addresses; automatic personality recognition, perception, and synthesis \citep[p.~280]{Vinciarelli2014}; this study focuses on automatic personality recognition.
-Personality computing integrates artificial intelligence and personality psychology by analyzing personality traits using a variety of computational techniques from various data sources, such as text, multimedia, and social networks. In this area of study, personality often represented as quantifiable traits, with the Big Five Personality model being a widely used framework. The Big Five model categorizes personality into five traits, namely: extraversion, agreeableness, conscientiousness neuroticism, and openness. 
-
-Personality computing research is commonly divided into three subfields: Automatic Personality Recognition (APR), Automatic Personality Perception (APP), and Automatic Personality Synthesis (APS) \citep{Vinciarelli2014}.
+With the widespread adoption of social networking sites (SNS), personal content such as images, captions, and interactions has become publicly accessible on a large scale. This development has opened new avenues for research on personality inference using digital footprints. One such approach is Automatic Personality Recognition (APR), which involves inferring a person’s personality traits from their online activity.
 
 % Describe the domain (where will you apply the topic)
 Automatic personality recognition (APR) aims to infer the personality of an individual based on their digital footprint. APR has been traced back to the work of \citet{Pennebaker1999} wherein they asked the question of \textit{can language use reflect personality style?}
 
+APR typically uses the Big Five Personality Model, which includes the traits: extraversion, agreeableness, conscientiousness, neuroticism, and openness. Researchers have explored various machine learning techniques—particularly deep learning models such as deep neural networks (DNNs) and support vector machines (SVMs)—to link digital content to these personality traits. While early studies predominantly analyzed text-based features, more recent work has expanded to include multimodal data, such as images and videos, reflecting the evolving nature of online content.
+
+Social media platforms like Instagram, which emphasize visual content, offer unique opportunities for personality analysis. Prior research suggests that user-generated content on these platforms often reflects personal expression in spontaneous and unintended ways, making them valuable for computational personality inference.
 % Give a synthesis of previous work
 
 % Synthesis of previous studies...
@@ -132,9 +132,9 @@ The integration of visual and textual data from social media platforms has emerg
 \begin{enumerate}[label=\textbf{ \arabic*:}, leftmargin=*]
 	\item \textbf{Extract and Analyze Visual Features from Images:} Utilize computer vision techniques to extract visual features from Instagram images, focusing on aspects such as color schemes, composition, and content, which have been linked to personality traits in previous studies.
 	
-	\begin{mdframed} [style=highlight]
+
 	\item \textbf{Train Machine Learning Models using Multimodal Data for Personality Prediction:} Develop machine learning models that combine both visual and textual features to enhance the accuracy of personality trait predictions, leveraging the complementary information from both data modalities.
-	\end{mdframed}
+	
 	\item \textbf{Evaluate the Predictive Performance of the Framework:} Assess the effectiveness of the multimodal framework by comparing its performance against unimodal approaches (using only images or captions) in predicting personality traits.
 	
 \end{enumerate}
@@ -254,11 +254,13 @@ Specific Objective:
 \section{Significance of the Study}
 \label{sec: Significance}
 
-To our knowledge, image features in Filipino APR have not been explored yet. Therefore, exploring this would maybe give better insights on how images from Filipino Instagram Users tell their personality.  While existing studies have largely focused on textual data from platforms like Twitter, our study expands the scope by incorporating visual elements from Instagram and fusing these two features: textual data and image data. 
+To date, the use of image features in Automatic Personality Recognition (APR) research in the Philippine setting remains largely unexplored. This study addresses that gap by investigating how visual content—specifically images shared by Filipino Instagram users—can reveal aspects of personality. While existing personality prediction studies have predominantly relied on textual data from platforms such as Twitter, our work expands this scope by incorporating Instagram’s multimodal nature and combining both text and image features.
 
-This study also addresses the underrepresentation of Filipino social media data in personality recognition research. By utilizing data in both English and Filipino languages alongside visual content, this research displays whether there is a significant improvement in predicting the personality of Filipinos when integrating image features as well. Moreover, this study investigates whether combining text and image features results in a significant improvement in personality prediction accuracy compared to unimodal approaches. 
+By integrating visual elements with textual data in both English and Filipino, this research aims to determine whether personality prediction accuracy improves when using a multimodal approach compared to unimodal (text-only or image-only) methods. In doing so, this study not only introduces image-based analysis to Filipino APR but also examines how the fusion of modalities may enhance prediction performance.
 
-Apart from benefiting Filipino APR research, this study possibly benefits marketing, advertising, and social networking platforms as well. In \cite{Matz2017} study on Psychological Targeting in Digital Marketing, it was found that by aligning ad content with the personality traits of target audiences, marketers can enhance engagement and conversion rates (the percentage of users who take a desired action after being exposed to a targeted advertisement). 
+Additionally, this research contributes to addressing the underrepresentation of Filipino social media users in personality recognition studies. This research highlights the potential of culturally and linguistically inclusive models that better reflect the diversity of online users in the Philippines.
+
+Beyond academic contribution, the findings of this study may have practical applications in areas such as digital marketing, advertising, and social networking. As demonstrated in \citet{Matz2017} study on psychological targeting in digital marketing, aligning content with user personality traits can significantly boost engagement and conversion rates. Thus, insights from this research could inform strategies for more personalized and effective content delivery in online platforms.
 
 %%This section explains why research must be done in this area.  It rationalizes the objective of the research with that of the stated problem. Avoid including sentences such as ``This research will be beneficial to the proponent/department/college'' as this is already an inherent requirement of all BS and MS thesis projects.  Focus on the research's contribution to the Computer Science field.
 
@@ -270,7 +272,6 @@ Apart from benefiting Filipino APR research, this study possibly benefits market
 %
 %%\begin{itemize}
 %%\item  What is the relevance and contribution of your work to the computer science community? 
-\begin{mdframed} [style=highlight]
 \section{Research Methodology}
 \label{sec:methodology}
 
@@ -425,28 +426,28 @@ The metrics below will be used to compare per label the effectiveness of the mul
 \section{Ethical Considerations}
 \label{sec:Ethics}
 
-The PagkataoKo dataset’s methods were reviewed and given clearance by the Research Ethics Office of De La Salle University \citep{Tighe_Acorda_Agno_Gano_Go_Santiago_Sedillo_2022}. 
+The methods involved in the creation of the PagkataoKo dataset were reviewed and approved by the Research Ethics Office of De La Salle University \citep{Tighe_Acorda_Agno_Gano_Go_Santiago_Sedillo_2022}. This approval ensures that the study adheres to established ethical standards for research involving human participants, particularly in the collection and handling of social media data.
 
 \begin{itemize}
 	\item \textbf{Data Compliance:}
-		\begin{itemize}
-			\item Volunteers gave electronic consent
-			\item  Social media data was collected in accordance with the developer policies of Twitter and Instagram.
+	\begin{itemize}
+		\item All volunteers provided informed electronic consent before their data was included in the dataset. This consent process outlined the scope, purpose, and limitations of the research.
+		\item Data collection complied with the official developer policies and terms of service of both Twitter and Instagram, ensuring responsible and lawful data access through their respective APIs.
 	\end{itemize}
 	
 	\item \textbf{Privacy Protection:}
 	\begin{itemize}
-		\item Full anonymization of \texttt{UserID} and metadata
-		\item Encrypted storage of raw posts
+		\item Personally identifiable information (PII), including \texttt{UserID} and account metadata, was fully anonymized to prevent the tracing of data back to individuals.
+		\item All raw data, such as original posts and media files, were stored in encrypted form and restricted to authorized personnel only. This minimizes the risk of data breaches or unauthorized access.
 	\end{itemize}
 	
 	\item \textbf{Data Restrictions:}
 	\begin{itemize}
-		\item Research-only usage
-		\item No commercial or re-identification purposes
+		\item The dataset is used strictly for academic research purposes and is not intended for any commercial exploitation.
+		\item Re-identification of users is explicitly prohibited, and no attempts were made to reconstruct individual profiles or trace behavior back to specific persons.
 	\end{itemize}
 \end{itemize}
-\end{mdframed}
+
 %%\begin{itemize} 
 %%\item How does your technical contributions or empirical findings advance the field or grow our body of knowledge? 
 %%\item If you built a prototype of an interaction technique, interface, library, tool, or system, what is value does it add compared to existing solutions? 
