@@ -1,62 +1,151 @@
 \chapter{Methodology}
 \label{sec:methodology}
 
-This chapter enumerates and discusses the specific steps and activities that will be performed by the proponent to accomplish the objectives of the research. The discussion covers the activities from pre-proposal to Final Thesis Writing. 
+\section{Research Methodology}
 
-Ethical issues surrounding the research and the steps to be taken by the research team to adhere to ethical guidelines and principles should be included when discussing each of the activities.
+Our multimodal personality recognition pipeline employs intermediate fusion to integrate image, text, and metadata features from Filipino Instagram users. The methodology consists of six key phases:
 
-Research activities include inquiry, survey, research, brainstorming, canvassing, consultation, review, interview, observe, experiment, design, test, document, and other similar tasks. The following sections present an example set of activities and methods for conducting computing research. \textbf{\textcolor{red}{However, note that your group's actual research activities and methods will be different depending on your intended research contributions. You should consult closely with your thesis adviser for proper guidance. The following sections need not appear in your actual thesis proposal.}}
+\subsection{Preprocessing}
+\label{subsec:preprocessing}
 
-\section{Data Collection}
-
-This section, also called "Data Gathering", focus on activities that will enable the researchers to understand their users and their context better, or to analyze the operating environment where the proposed software may be deployed. The types of activities would include interviews, observations, surveys, focus group discussions, and review of secondary data (reports, videos, manuals) to enable the researchers to identify user requirements; learn the existing processes, strategies, rules and guidelines; and/or build the datasets and knowledge resources needed in the study.
-
-Ethical issues surrounding the collection of data from human participants, and from internet or 3rd party sources should be indicated. The steps to be taken by the proponents to ensure that ethical guidelines are followed should also be explained.
-
-\section{Software Design and Implementation}
-
-This section covers the design of data structures, knowledge bases, user interface, and algorithms. It includes implementation and related activities - tool selection, unit testing, integration testing, and function testing - that were covered in the course "Software Engineering".
-
-Your Adviser may ask you to separate the Design and the Implementation sections as needed. 
-
-You may also indicate a specific software development lifecycle model that you plan to adopt in developing your software, such as the Agile methodology.
-
-For machine learning types of research, this section may be replaced with "Model Training".
-
-\section{Validation}
-
-This section contains the different types of validation activities that you will conduct to evaluate the performance of your model or algorithm or software. It may include user perception studies, end user acceptance testing, usability test, and model validation.
-
-Ethical issues surrounding the collection of data from human participants should be indicated. The steps to be taken by the proponents to ensure that ethical guidelines are followed should also be explained.
-
-This section should include a discussion of the following if working with human participants:
 \begin{itemize}
-    \item Participant Selection. Who are your target participants? How will they be selected? What data will be collected?
-    \item Orientation. How will ethics be observed? What documents, e.g., validation protocol, will be shared with participants to orient them regarding the research and the validation procedure? Will there be an Informed Consent and Informed Assent? Are they found in the Appendix? Will there be any pre-tests or interviews to be administered prior to the actual experiment?
-    \item Experiment Proper (aka Procedure). How long is the experiment or how long should the user use your software? Is it one-on-one, or one-to-many? What will you do while the experiment is ongoing - observe the participants using a checklist, guide the participants, record the interaction/usage?
-    \item Debriefing. After the experiment, will you administer any post-tests or debriefing to solicit feedback from your participants? What are these?
+	\item \textbf{Data Aggregation:}
+	\begin{itemize}
+		\item Posts are grouped by \texttt{UserID} to form user-level profiles.
+		\item Metadata such as \texttt{PostCount}, \texttt{Following Count}, and temporal posting patterns are extracted to serve as behavioral signals.
+	\end{itemize}
+	
+	\item \textbf{Missing Data Handling:}
+	\begin{itemize}
+		\item Posts without captions are retained for image-only analysis.
+		\item Missing text features are imputed using zero vectors.
+		\item Metadata-derived proxies such as \texttt{PostCount} act as activity indicators.
+	\end{itemize}
 \end{itemize}
 
-\subsection{Calendar of Activities}
+\subsection{Exploratory Data Analysis}
+\label{subsec:eda}
 
-For the proposal, a Gantt chart showing the schedule of the activities should be added. You can create a table like below, or create a figure. For example:
+\begin{itemize}
+	\item \textbf{Demographic Analysis:}
+	\begin{itemize}
+		\item Assesses geographic distribution (e.g., Luzon, Visayas, Mindanao).
+		\item Reviews age and gender representation.
+	\end{itemize}
+	
+	\item \textbf{Visual Pattern Discovery:}
+	\begin{itemize}
+		\item Identifies color dominance through HSV histograms.
+		\item Uses OpenCV’s Haar cascades for face detection (e.g., face count in selfies).
+	\end{itemize}
+	
+	\item \textbf{Temporal Trends:}
+	\begin{itemize}
+		\item Examines correlations between posting times and personality traits (e.g., late-night activity as potential Neuroticism signal).
+	\end{itemize}
+\end{itemize}
 
-Table \ref{tab:timetableactivities} shows a Gantt chart of the activities.  Each bullet represents approximately one week worth of activity.
+\subsection{Feature Extraction}
+\label{subsec:features}
 
-\begin{table}[]
-    \centering
-    \begin{tabular}{l|c|c|c|c|c|c|c|c|c}
-         \toprule
-         & \multicolumn{6}{c|}{2021} & \multicolumn{3}{c}{2022} \\
-         \textbf{Activity} & \textbf{Apr} & \textbf{May} & \textbf{Jun} & \textbf{Jul} & \textbf{Aug} & \textbf{Sep} & \textbf{Jan} & \textbf{Feb} & \textbf{Mar} \\
-         \midrule
-         Data Collection & **** & **** & & & & & & & \\
-         \midrule
-         Software Design & & **** & **** & **** & **** & **** & & & \\
-         \midrule
-         Validation & & & & & & **** & **** & **** & \\
-         \bottomrule
-    \end{tabular}
-    \caption{Gantt Chart of Activities}
-    \label{tab:timetableactivities}
-\end{table}
+\begin{itemize}
+	\item \textbf{Image Features:}
+	\begin{itemize}
+		\item \textbf{VGG-19}: Extracts deep style and texture features from images (e.g., visual complexity).
+		\item \textbf{Object Detection}: Utilizes JSON metadata to infer social context (e.g., group photos linked to Extraversion).
+		\item Color features are derived using k-means clustering in HSV color space.
+	\end{itemize}
+	
+	\item \textbf{Text Features:}
+	\begin{itemize}
+		\item Captions are processed using LIWC categories, extended to include Tagalog.
+		\item Bilingual sentiment analysis is applied for English and Tagalog texts.
+	\end{itemize}
+	
+	\item \textbf{Metadata Features:}
+	\begin{itemize}
+		\item Behavioral signals such as \texttt{Following Count}, post frequency, and time-of-day activity are captured.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Intermediate Feature Fusion}
+\label{subsec:fusion}
+
+To integrate the diverse feature types, we use an intermediate fusion strategy at the feature level:
+
+\begin{enumerate}
+	\item \textbf{Modality-Specific Encoding:}
+	\begin{itemize}
+		\item Image features: VGG-19 embeddings (4,096 dimensions).
+		\item Text features: TF-IDF-weighted LIWC vectors.
+		\item Metadata features: Min-max scaled numeric values.
+	\end{itemize}
+	
+	\item \textbf{Concatenation:} A unified multimodal feature vector is formed for each user.
+	
+	\item \textbf{Dynamic Weighting:} An attention-based mechanism dynamically prioritizes modalities depending on trait:
+	\begin{itemize}
+		\item Image features are weighted more for Openness.
+		\item Text features are emphasized for Neuroticism.
+	\end{itemize}
+\end{enumerate}
+
+\subsection{Model Training}
+\label{subsec:models}
+
+Each personality trait is modeled independently using both single-modality and fused feature vectors.
+
+\subsubsection{Support Vector Machines (SVM)}
+\label{subsubsec:svm}
+
+\begin{itemize}
+	\item \textbf{Rationale:}
+	\begin{itemize}
+		\item Well-suited for high-dimensional data \cite{farnadi2018}.
+		\item RBF kernel captures non-linear patterns.
+		\item Performs reliably with medium-scale datasets and is robust against overfitting.
+	\end{itemize}
+	
+	\item \textbf{Implementation:}
+	\begin{itemize}
+		\item Hyperparameters (\texttt{C}, \texttt{gamma}) are optimized via grid search.
+		\item Class weights are balanced to address trait distribution imbalances.
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{XGBoost}
+\label{subsubsec:xgboost}
+
+\begin{itemize}
+	\item \textbf{Rationale:}
+	\begin{itemize}
+		\item Handles heterogeneous and structured data efficiently \cite{chen2016}.
+		\item Provides built-in tools for feature importance analysis.
+	\end{itemize}
+	
+	\item \textbf{Implementation:}
+	\begin{itemize}
+		\item Early stopping is applied to prevent overfitting.
+		\item Key parameters: \texttt{max\_depth=6}, \texttt{learning\_rate=0.1}, and 500 estimators.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Model Analysis}
+\label{subsec:analysis}
+
+We evaluate both single- and multimodal models using the following criteria:
+
+\begin{itemize}
+	\item \textbf{Evaluation Metrics:}
+	\begin{itemize}
+		\item Macro-F1 score to account for class imbalance.
+		\item AUC-ROC to measure discriminatory power across traits.
+		\item SHAP values to enhance model interpretability.
+	\end{itemize}
+	
+	\item \textbf{Ablation Studies:}
+	\begin{itemize}
+		\item Assess the contribution of each modality.
+		\item Compare performance of single versus fused modalities.
+	\end{itemize}
+\end{itemize}
