@@ -53,6 +53,8 @@ The widespread adoption of social media has further propelled APR research, prov
 
 Despite growing research in APR, most studies have primarily focused on Western populations. Limited research has explored personality inference methods within Filipino contexts, particularly in using image-based data.
 
+There are a number of studies that show improved performance of models when using multimodal approaches rather than unimodal, yet this approach remains largely underexplored in the context of Filipino automatic personality recognition (APR). Most existing studies focus solely on single-modal data, particularly text data. However, platforms like Instagram offer a rich source of multimodal data, specifically images and text, that could notably improve personality analysis. Exploring this untapped resource appears promising, especially considering the previous success of multimodal approaches in non-Filipino contexts.
+
 % State the problem and the research question
 
 % Paragraph containing the Problem Statement or the Research Question.
@@ -236,6 +238,10 @@ Specific Objective:
 	\item \textbf{The Big Five Personality Traits:} In evaluating the predictive performance of the framework, the analysis is based on the big five personality traits.
 	
 	\item \textbf{Limited to Philippine Demographics:} To effectively investigate the cultural factors that influence the expression of personality traits of the Filipino Instagram users, the dataset contains post made by Filipino Instagram users.
+	
+	\item \textbf{Data Representation:} To represent a single instance in the dataset, both the text and image features will be normalized and compiled into one vector. The text feature to be fed into the machine learning is the \textit{caption}, the image features be the first five detected tag words.
+	
+	\item \textbf{Categorization of Data:} The label of the data will be one of the personality trait in the OCEAN model. Because of the use of classification in machine learning, the classes of the label are "yes" and "no", meaning whether the person (the instance of the dataset) has the personality trait or not, respectively.
 \end{enumerate}
 
 % This section discusses the boundaries, with respect to the objectives, of the research and the constraints within which the research will be developed. Describe what is and is not included in the scope of your research, supported by your main research question and findings of previous studies. Do not use weak excuses such as the lack of time and/or knowledge to perform the research.
@@ -278,6 +284,7 @@ Beyond academic contribution, the findings of this study may have practical appl
 %
 %%\begin{itemize}
 %%\item  What is the relevance and contribution of your work to the computer science community? 
+
 \section{Research Methodology}
 \label{sec:methodology}
 
