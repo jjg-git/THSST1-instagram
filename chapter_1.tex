@@ -228,21 +228,18 @@ Specific Objective:
 \section{Scope and Limitations of the Research}
 \label{sec:scopelimitations}
 
-\begin{enumerate}[label=\textbf{ \arabic*:}, leftmargin=*]
-	\item \textbf{Using Classification Machine Learning Techniques:} This study focuses on classifying the personality traits from Instagram images. Thus, it uses classification techniques instead of regression where it determines the value in the interval.
-	 
-	\item \textbf{Edge Detection:} Many image processing techniques are used to expand the number of data points in the dataset. However, this study relies on edge detection techniques to extract the visual features from Instagram images, focusing on aspects such as color schemes, composition, and content, which have been linked to personality traits in previous studies.
+
+	This research explores the use of classification-based machine learning techniques to recognize personality traits of Filipino Instagram users through a multimodal approach that incorporates both visual and textual content. The study aims to determine the viability of image based features in predicting the Big Five Personality Traits, which remains underexplored in the Philippine context. It focuses exclusively on Instagram, a platform that naturally supports multimodal data, to investigate whether combining visual and textual features enhances predictive accuracy compared to using a single modality.
 	
-	\item \textbf{Including Instagram Posts With Both Photo and Caption:} The dataset is filtered to have posts that contain both the photo and the caption.
+	One major focus of the study is the application of classification algorithms rather than regression models. Since personality categories are evaluated in terms of trait presence rather than numerical ranges, classification is more appropriate for assigning discrete personality labels based on extracted features.
 	
-	\item \textbf{The Big Five Personality Traits:} In evaluating the predictive performance of the framework, the analysis is based on the big five personality traits.
+	To extract meaningful visual features from Instagram posts, the study uses edge detection techniques in image preprocessing. This allows for analysis of image structures, color composition, and content framing elements which have been correlated with personality in past research. While other preprocessing techniques exist, this study limits itself to edge detection to maintain methodological clarity and computational efficiency.
 	
-	\item \textbf{Limited to Philippine Demographics:} To effectively investigate the cultural factors that influence the expression of personality traits of the Filipino Instagram users, the dataset contains post made by Filipino Instagram users.
+	The dataset is also restricted to Instagram posts that contain both an image and a caption, to fully support the multimodal nature of the study. Posts that lack either element are excluded to ensure a consistent data format and to support the objective of analyzing how the integration of visual and textual cues can improve personality recognition.
 	
-	\item \textbf{Data Representation:} To represent a single instance in the dataset, both the text and image features will be normalized and compiled into one vector. The text feature to be fed into the machine learning is the \textit{caption}, the image features be the first five detected tag words.
+	This study limits its analysis to Filipino Instagram users, ensuring that the research addresses cultural nuances in personality expression. By focusing on the Philippine demographic, the study accounts for language-specific and culturally shaped patterns in online behavior, which are often overlooked in broader personality recognition studies.
 	
-	\item \textbf{Categorization of Data:} The label of the data will be one of the personality trait in the OCEAN model. Because of the use of classification in machine learning, the classes of the label are "yes" and "no", meaning whether the person (the instance of the dataset) has the personality trait or not, respectively.
-\end{enumerate}
+	Finally, the study evaluates personality traits based on the Big Five Model (openness, conscientiousness, extraversion, agreeableness, and neuroticism). This framework was selected due to its widespread use and empirical support in psychological and computational personality studies. Other models, such as MBTI, are excluded for the sake of standardization and comparability with related literature.
 
 % This section discusses the boundaries, with respect to the objectives, of the research and the constraints within which the research will be developed. Describe what is and is not included in the scope of your research, supported by your main research question and findings of previous studies. Do not use weak excuses such as the lack of time and/or knowledge to perform the research.
 
@@ -266,13 +263,18 @@ Specific Objective:
 \section{Significance of the Study}
 \label{sec: Significance}
 
-To date, the use of image features in Automatic Personality Recognition (APR) research in the Philippine setting remains largely unexplored. This study addresses that gap by investigating how visual content—specifically images shared by Filipino Instagram users—can reveal aspects of personality. While existing personality prediction studies have predominantly relied on textual data from platforms such as Twitter, our work expands this scope by incorporating Instagram’s multimodal nature and combining both text and image features.
+This study aims to address the current research gap in Automatic Personality Recognition (APR) by exploring how multimodal data—specifically image and text content from Instagram—can be used to infer personality traits among Filipino users. Unlike many existing studies that rely on textual data from platforms like Twitter, this research expands the scope of APR by integrating visual analysis, thereby introducing an image-based personality prediction component into the local research landscape.
 
-By integrating visual elements with textual data in both English and Filipino, this research aims to determine whether personality prediction accuracy improves when using a multimodal approach compared to unimodal (text-only or image-only) methods. In doing so, this study not only introduces image-based analysis to Filipino APR but also examines how the fusion of modalities may enhance prediction performance.
+\textbf{The expected outputs of this study include:} 
+\begin{itemize}
+\item identifying which visual and textual features are most indicative of personality traits among Filipino Instagram users 
+\item evaluating whether multimodal models outperform unimodal models in terms of prediction accuracy.
+\end{itemize} 
+These findings will be important for future researchers in computational psychology, affective computing, and artificial intelligence who seek to build more culturally sensitive and accurate personality models.
 
-Additionally, this research contributes to addressing the underrepresentation of Filipino social media users in personality recognition studies. This research highlights the potential of culturally and linguistically inclusive models that better reflect the diversity of online users in the Philippines.
+Moreover, the study contributes to a more inclusive understanding of digital personalities by incorporating Filipino social media behavior, which is often underrepresented in global datasets. The ability to recognize patterns specific to Filipino users has implications for building locally relevant tools and frameworks in psychological computing and user profiling.
 
-Beyond academic contribution, the findings of this study may have practical applications in areas such as digital marketing, advertising, and social networking. As demonstrated in \citet{Matz2017} study on psychological targeting in digital marketing, aligning content with user personality traits can significantly boost engagement and conversion rates. Thus, insights from this research could inform strategies for more personalized and effective content delivery in online platforms.
+While the primary contribution of the study is academic, its findings could also have practical relevance in fields such as digital marketing, recommendation systems, and online community management. For example, understanding how visual styles relate to personality may help refine audience segmentation strategies or improve content personalization. However, such applications are considered secondary to the primary aim of advancing research on multimodal APR in a Philippine context.
 
 %%This section explains why research must be done in this area.  It rationalizes the objective of the research with that of the stated problem. Avoid including sentences such as ``This research will be beneficial to the proponent/department/college'' as this is already an inherent requirement of all BS and MS thesis projects.  Focus on the research's contribution to the Computer Science field.
 
