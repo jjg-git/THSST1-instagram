@@ -13,7 +13,7 @@ This chapter outlines the seven-stage research method designed to create and ass
 \label{sec:data}
 This research uses the Instagram subset of the PagkataoKo dataset, a resource specifically created for Filipino APR studies. This dataset fits our study well because it includes user-generated content like posts and images, demographic information, and self-reported Big Five personality scores, which are essential for supervised machine learning. The original Instagram subset has data from 1,380 Filipino users, totaling 195,757 posts. 
 
-We will set specific inclusion criteria to ensure data quality and suitability for a multimodal analysis. First, we will exclude users with fewer than five posts that contain both an image and a caption. Second, we will exclude users with more than 50\% of post captions missing. These initial thresholds are meant to guarantee a baseline level of user activity and the presence of both image and text data modalities. We will validate and may adjust these values during the Exploratory Data Analysis phase to achieve an optimal balance between data quantity and quality. 
+We will set specific inclusion criteria to ensure data quality and suitability for a multimodal analysis. The  thresholds that will be based on EDA findings to achieve an optimal balance between data quantity and quality. 
 
 For model training and evaluation, the dataset will be divided using a user-level stratified split for model training and evaluation: 70\% for training, 15\% for validation, and 15\% for testing. This stratification ensures that the demographic distribution of age and gender in the original dataset is preserved across all splits, which helps prevent sampling bias.
 
