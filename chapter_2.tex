@@ -56,50 +56,6 @@ The latest advancements in multimodal APR have shifted toward deep learning-base
 
 Building on deep learning methodologies, \citet{Lima2022} leveraged sequential data modeling to improve real-time personality prediction. Their model incorporated Long Short-Term Memory (LSTM) networks, demonstrating that capturing temporal dependencies enhances classification accuracy. Their research concluded that personality traits are not static but evolve based on user interactions, emphasizing the potential of adaptive AI-driven personality assessments.
 
-\section{Learning Approaches to APR}
-\label{sec: LearningApproaches}
-
-\begin{table}
-\begin{center}
-\begin{tabular}{*5c}
-	\toprule
-	\textbf{Study} & \textbf{Best Model} & \textbf{Trait} & \multicolumn{2}{c}{\textbf{Score}} \\
-	\midrule
-	{} & {} & {} & Accuracy & F2 \\
-	
-	Mairesse et al., 2007 & SVM & O & 62.10\% & {} \\
-	
-	Tighe \& Cheng, 2018 & LR & C & {} & 77.64\% \\
-	
-	Celli, Bruni \& Lepri, 2014 & SVM & C & 75\% & {} \\
-	
-	Salem, 2019 & KNN & C & {} & F1: 75\% \\
-	\bottomrule
-\end{tabular}
-\caption{Summary of the studies with 
-	the best learning approach and the easiest trait to train.
-	SVM for Support Vector Machine, LR for Logistic regression, and
-	KNN for K-nearest Neighbor. Big Five Personality Trait: 
-	O for Openness to Experience, and C for conscientiousness}
-\label{learning_approach}
-\end{center}
-\end{table}
-
-\citet{mairesse_using_2007} found that the Adaboost classifier algorithm had the highest accuracy under Extraversion (55.00\%), yet the Support Vector Machine (SVM) found to be the most accurate under Openness (62.10\%), Conscientiousness (55.29\%), Agreeableableness (55.78\%), and Neuroticism (57.35\%). However, for the facial recognition in the study by \citet{celli_automatic_2014}, SVM was at most accurate under Conscienciousness (73.3\%). The other personality trait under SVM was Agreeableness with the accuracy of 66.7\%. \citet{tighe_modeling_2018} found that Logistic Regression algorithm had the highest F1 score under Conscientiousness (77.64\%). \citet{salem_personality_2019} had Conscientiousness as the easiest trait to model but under the K-nearest neighbor algorithm with an F1 score of 75%.
-
-\begin{comment}
-\begin{itemize}
-    \item \citet{tighe_modeling_2018}
-    \item \citet{mairesse_using_2007}
-    \item \citet{ilmini_persons_2016}
-    \item \citet{deilami_using_2022}
-    \item \citet{farnadi_computational_2016}
-    \item \citet{celli_automatic_2014}
-    \item \citet{sarkar_feature_2014}
-    \item \citet{salem_personality_2019}
-    \item \citet{farnadi_computational_2016}
-\end{itemize}
-\end{comment}
 
 \section{Filipino APR}
 \label{sec: FilipinoAPR}
