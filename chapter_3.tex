@@ -9,19 +9,44 @@
 \chapter{Theoretical Framework}
 \label{sec:theoframework}
 
-This research is anchored on several foundational theories and models that inform the development of a multimodal approach to automatic personality recognition, particularly within the context of Filipino Instagram users. The convergence of personality psychology, multimodal machine learning, and social media behavior forms the theoretical backbone of this study.
+This chapter presents the theoretical foundations that inform the development of a multimodal personality recognition framework for Filipino Instagram users. The discussion is organized around key technical pillars, including text and image processing, feature fusion techniques, machine learning theory, and the underlying personality psychology model.
 
-\section{The Big Five Personality Traits (Five-Factor Model)}
-The Five-Factor Model (FFM), also known as the Big Five, is the most widely accepted framework for understanding human personality. It categorizes personality into five dimensions: Openness to Experience, Conscientiousness, Extraversion, Agreeableness, and Neuroticism (McCrae \& Costa, 1999). This model provides a structured approach to labeling and quantifying personality traits, which is essential for supervised learning in automatic personality recognition. The Big Five is used as the ground truth for evaluating personality from user-generated data.
+\section{Text Processing Theory}
 
-\section{Multimodal Machine Learning Theory}
-Multimodal machine learning refers to models that process and integrate multiple types of data (e.g., text, images, audio) to perform tasks more effectively than single-modality systems (Baltrušaitis et al., 2019). Instagram, as a social media platform, is inherently multimodal—users post textual captions, visual content, and other metadata. This study leverages multimodal theory to combine linguistic (e.g., captions, hashtags), visual (e.g., images, filters), and behavioral cues (e.g., posting frequency) to improve the accuracy of personality recognition.
+Textual data from Instagram captions provides valuable linguistic cues for personality inference. This study employs the \textit{Vector Space Model} (Salton, Wong, \& Yang, 1975), where text is represented as weighted feature vectors using the Term Frequency Inverse Document Frequency (TF-IDF) scheme. TF-IDF reflects the importance of words within individual captions while down weighting common terms across the corpus, enhancing the model's ability to capture personality relevant language patterns.
 
-\section{Social Media Self-Presentation Theory}
-According to Goffman’s (1959) theory of self-presentation and its applications to digital platforms, individuals curate their online profiles to project a desired image. Instagram posts often reflect personality traits, whether consciously or unconsciously. This research assumes that the way Filipino users present themselves on Instagram through their language, image content, and interaction patterns offers valid signals of their underlying personality traits.
+Beyond sparse TF-IDF vectors, word embeddings such as Word2Vec or contextual models like BERT offer dense semantic representations that capture nuanced word relationships. These embeddings complement TF-IDF by providing richer contextual information, essential for modeling bilingual and informal language prevalent among Filipino social media users.
 
-\section{Cultural Dimensions Theory}
-Hofstede’s Cultural Dimensions Theory (Hofstede, 1980) suggests that culture affects behavior and communication. Since this research focuses on Filipino users, it is important to consider how Filipino cultural values (such as collectivism, high-context communication, and pakikisama) may influence both content creation and personality expression online. This cultural lens helps interpret the features extracted from Instagram data in a way that aligns with localized behavioral norms.
+\section{Image Processing Theory}
 
-\section{Computational Personality Recognition (CPR)}
-CPR is an interdisciplinary field combining psychology, natural language processing (NLP), computer vision, and data science to infer personality traits from digital footprints (Youyou et al., 2015). This study builds on previous CPR works by applying a multimodal strategy tailored to Filipino Instagram users, whose social media use patterns and cultural context differ from Western-centric datasets often used in CPR studies.
+Instagram's visual content necessitates effective image processing techniques to extract personality related features. Standard preprocessing steps include resizing and normalization to ensure uniformity across image inputs. Feature extraction leverages deep Convolutional Neural Networks (CNNs), specifically the VGG-19 architecture (Simonyan \& Zisserman, 2015), which has demonstrated strong performance in visual representation learning.
+
+Extracted image features encompass both low level characteristics (e.g., color, brightness) and high level semantic content (e.g., objects, scenes) known to correlate with personality traits, as supported by prior research.
+
+\section{Fusion Techniques}
+
+Multimodal learning integrates heterogeneous features from text and images to improve personality prediction accuracy. Two primary fusion strategies are considered:
+
+\begin{itemize}
+	\item \textbf{Early Fusion:} Feature level integration, where extracted features from each modality are concatenated into a unified vector prior to model training.
+	\item \textbf{Late Fusion:} Decision level integration, where separate models are trained per modality, and their outputs are combined for final prediction.
+\end{itemize}
+
+Following Liu et al. (2022) and Kampman et al. (2018), this research adopts an intermediate, attention based fusion mechanism that dynamically adjusts the contribution of each modality based on the target personality trait, recognizing that certain traits (e.g., Openness) may be more visually encoded, while others (e.g., Neuroticism) are better captured through language.
+
+\section{Machine Learning Theory}
+
+To model the relationship between extracted multimodal features and personality traits, this study employs established supervised learning algorithms:
+
+\begin{itemize}
+	\item \textbf{Support Vector Machines (SVM):} SVMs are well suited for high dimensional feature spaces, using kernel functions (e.g., Radial Basis Function) to capture non linear relationships within the data.
+	\item \textbf{Extreme Gradient Boosting (XGBoost):} XGBoost, a tree ensemble method, efficiently handles structured data and provides built in mechanisms for feature importance analysis and overfitting control.
+\end{itemize}
+
+These algorithms have demonstrated strong performance in prior personality recognition research (Kazameini et al., 2020; Naz et al., 2025).
+
+\section{Personality Theory}
+
+This research operationalizes personality using the \textit{Big Five Personality Traits} model (McCrae \& Costa, 1999), encompassing Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism. The Big Five framework offers a robust, empirically validated structure for personality assessment, serving as the ground truth for supervised model training.
+
+Recent advancements in computational personality recognition, including deep learning and multimodal approaches (Mehta et al., 2019; Naz et al., 2025), provide a strong theoretical basis for leveraging Instagram content in trait prediction tasks.

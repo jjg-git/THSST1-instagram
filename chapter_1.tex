@@ -9,7 +9,7 @@
 \chapter{Introduction}
 \label{sec:intro}    %--note: labels help you with hyperlink editing (using your IDE)
 
-Social media platforms have been used as means of self-expression for users. These platforms give users the possibility to express and expose their identity \citep{Marcus2006}. As such, data from social media platforms can lead us to gain insights from personality traits of these users. 
+This chapter gives an overview of the purpose of our study and the motivations for pursuing it. We outline our goals, limitations, and the methods that we intend to use in our research.
 
 %%This chapter builds the motivation for the conduct of the research through a description of the background of the study or the current state of technology. This is followed by the research objectives, the scope and limitations, and significance of the research. The chapter ends with the research methodology describing the different activities to be conducted to achieve the goals of this research.%%
 
@@ -32,34 +32,31 @@ Social media platforms have been used as means of self-expression for users. The
 %%Follow the inverted pyramid to describe each of the following. Allocate one (1) paragraph per level in the pyramid. 
 
 % Describe the research area
-Personality is defined as “patterns of thought, emotion, and behavior” \citep{Vinciarelli2014}. In a society, people develop opinions and treat each other differently based on their perception of the person’s personality. Understanding personality plays a significant role in fields such as psychology as this information can be used in studies of mental health and human behavior. 
 %Research area ...
 %This study's main research area is on personality computing. Personality computing is related to artificial intelligence and personality psychology by studying one's personality through a variety of computational techniques from different sources (usually text, multimedia, and social networks). Among the three main problems personality computing addresses; automatic personality recognition, perception, and synthesis \citep[p.~280]{Vinciarelli2014}; this study focuses on automatic personality recognition.
-With the widespread adoption of social networking sites (SNS), personal content such as images, captions, and interactions has become publicly accessible on a large scale. This development has opened new avenues for research on personality inference using digital footprints. One such approach is Automatic Personality Recognition (APR), which involves inferring a person’s personality traits from their online activity.
 
 % Describe the domain (where will you apply the topic)
-Automatic personality recognition (APR) aims to infer the personality of an individual based on their digital footprint. APR has been traced back to the work of \citet{Pennebaker1999} wherein they asked the question of \textit{can language use reflect personality style?}
 
-APR typically uses the Big Five Personality Model, which includes the traits: extraversion, agreeableness, conscientiousness, neuroticism, and openness. Researchers have explored various machine learning techniques—particularly deep learning models such as deep neural networks (DNNs) and support vector machines (SVMs)—to link digital content to these personality traits. While early studies predominantly analyzed text-based features, more recent work has expanded to include multimodal data, such as images and videos, reflecting the evolving nature of online content.
+Personality is defined as “patterns of thought, emotion, and behavior” \citep{Vinciarelli2014}. For purposes of personality computing, personality is broken down into various characteristics that can be measured quantitatively \citep{Vinciarelli2014}. The most widely used model in this field is the Big Five Personality Model, which comprises the traits of extraversion, agreeableness, conscientiousness, neuroticism, and openness. Other well-known models include the Myers–Briggs Type Indicator (MBTI) and the Cattell Sixteen Personality Factor (16PF). Using these models, the traditional method of measuring personality is by using a multiple-choice questionnaire \citep{farnadi2018}, wherein each choice corresponds to a value for each personality characteristic. These values are then aggregated to obtain the final results, which may take the form of numerical scores for each trait or categorical classifications. Understanding personality plays a significant role in fields such as psychology, as this information can be used in studies of mental health and human behavior. It has also garnered increasing interest in the fields of social science, business, education, and healthcare \citep{Miller2014} as it offers valuable insights into individual differences and supports more personalized approaches in these domains.
 
-Social media platforms like Instagram, which emphasize visual content, offer unique opportunities for personality analysis. Prior research suggests that user-generated content on these platforms often reflects personal expression in spontaneous and unintended ways, making them valuable for computational personality inference.
+However, these traditional methods of identifying personality are time-consuming and may be inconvenient for participants \citep{chen2016}, prompting the need for alternative methods to obtain these results. This leads us to the field of Automatic Personality Recognition (APR). APR aims to infer an individual’s personality based on their digital footprint. APR has been traced back to the work of \citet{Pennebaker1999} wherein they asked the question of \textit{can language use reflect personality style?} APR studies typically use inputs such as text, audio, or visual data, along with an individual’s personality trait scores, to train machine learning models. These models aim to analyze patterns and identify correlations in order to form accurate personality predictions, which may be either categorical or continuous (regression-based) in nature.
+
 % Give a synthesis of previous work
 
 % Synthesis of previous studies...
 %\citet{Pennebaker1999} and \citet{Mairesse2007} had demonstrated the different ways of detecting personalities and emotions by analyzing the text with various language models. Due to that, social media had became a common place for the research of personality detection. The PagkataoKo dataset has been made with social media activity on Instagram and X (formerly known as Twitter). There were more studies using X's data than Instagram due to X being a more prominent platform with its text-based posts. However, \citet{ferwerda2016}, \cite{Reece2017-qw} and \cite{Harris2019-gq} made studies that showed analyzing photos was possible. Thus, researching on Instagram became more meaningful in this manner.
-Previous studies have found success in the implementation of deep learning and deep neural networks in the field of APR \citep{Zhao2022}. The standard approach involves feature extraction, followed by machine learning techniques to associate extracted features with personality traits. Common models include deep neural networks (DNNs) and support vector machines (SVMs). 
 
-The widespread adoption of social media has further propelled APR research, providing large-scale, real-time behavioral data for personality inference. Studies suggest that social media interactions exhibit behavior that is “spontaneous and self-disclosing beyond intention” \citep{Vinciarelli2014}, making them valuable for personality analysis. Thus, many studies have taken to conducting personality analysis using data from personal social media profiles. Text was a common modality in their research, though a smaller number of papers have also explored image-based analysis. 
+Early studies in APR predominantly focused on text-based features, and more recent work has expanded to include multimodal data, such as images and videos \citep{Mehta2020}, reflecting the evolving nature of online content. The standard approach involves feature extraction, followed by machine learning techniques to associate extracted features with personality traits. Support vector machines (SVMs) are commonly used in APR studies. However, many have also found success with deep learning approaches \citep{Zhao2022} such as deep neural networks (DNNs), convolutional neural networks (CNNs), and recurrent neural networks (RNNs).
 
-Despite growing research in APR, most studies have primarily focused on Western populations. Limited research has explored personality inference methods within Filipino contexts, particularly in using image-based data.
+With the widespread adoption of social networking sites (SNS), personal content such as images, captions, and interactions has become publicly available on a large scale, providing accessible behavioral data for personality analysis and greater opportunity for research. Prior research suggests that user-generated content on these platforms often reflects personal expression in spontaneous and unintended ways \citep{Vinciarelli2014}, making them valuable for computational personality inference. Thus, many studies have taken to conducting personality analysis using data from personal social media profiles. Text was a common modality in their research, though a smaller number of papers have also explored image-based analysis. 
 
-There are a number of studies that show improved performance of models when using multimodal approaches rather than unimodal, yet this approach remains largely underexplored in the context of Filipino automatic personality recognition (APR). Most existing studies focus solely on single-modal data, particularly text data. However, platforms like Instagram offer a rich source of multimodal data, specifically images and text, that could notably improve personality analysis. Exploring this untapped resource appears promising, especially considering the previous success of multimodal approaches in non-Filipino contexts.
+Most existing APR studies have predominantly focused on Western populations, but progress in APR studies of non-Western languages is slowly being made, including Filipino. Filipino APR is a growing subfield that has started to gain increasing interest. This area presents unique challenges, such as frequent code-switching and the presence of diverse regional languages \citep{tighe_acorda_2022}. However, existing studies in this field have primarily focused on either the activity and usage of social media itself or on a text-based linguistic analysis of social media posts made by Filipinos in order to predict personality. There is a heavier focus on textual data as a modality, particularly X (formerly Twitter) data, while image-based and multimodal approaches remain largely underexplored. Platforms like Instagram offer a rich source of multimodal data, specifically images and text, that could notably improve personality analysis \citep{Skowron2016}. Furthermore, numerous studies show improved performance when multiple modalities are analyzed over just a single modality \citep{batrinca_multimodal_2016, lima_sequential_2022}. This presents the opportunity to explore a multimodal approach to Filipino APR using Instagram image data in addition to text data, which has the potential to improve upon existing models and yield more accurate results.
 
 % State the problem and the research question
 
 % Paragraph containing the Problem Statement or the Research Question.
 
-This study seeks to explore image-based APR methods tailored for Filipino users by leveraging Instagram data, integrating psychological analysis and computational techniques. The study aims to address the question: \textit{How can Instagram content, including images and captions, be used to infer a Filipino’s personality traits based on psychological and computational analysis?}
+This study seeks to explore multimodal APR methods tailored for Filipino users by leveraging Instagram data, integrating psychological analysis and computational techniques. The study aims to address the question: \textit{How effective is multimodal Instagram data as a source for recognizing manifestations of Filipino personality traits?}
 
 % This section ends with a discussion on the problem/s faced by or that still exist in the specific technology or field (e.g., limitations of existing software or algorithms). It should not contain your research objectives or goal; instead, the problem statement would lead to the research objectives to be stated in 1.2.
 
@@ -129,25 +126,21 @@ This study seeks to explore image-based APR methods tailored for Filipino users 
 
 \section{Research Objectives}
 \label{sec: objectives}
-The integration of visual and textual data from social media platforms has emerged as a promising approach for inferring individual personality traits. Building upon this foundation, the primary aim of this study is to develop a multimodal framework for the automatic recognition of personality traits among Filipino Instagram users, utilizing both image and caption data. This research seeks to contribute to the field of personality computing by demonstrating how multimodal social media content can be harnessed for psychological assessment, with a specific focus on the Filipino demographic.
-
-To achieve this aim, the study will pursue the following specific objectives:
+This study aims to explore the effectivity of a multimodal approach using Instagram data in the study of Filipino Automatic Personality Recognition. To achieve this, the study will pursue the following specific objectives:
 
 \begin{enumerate}
-	\item \textbf{Conduct Exploratory Data Analysis (EDA):} \\
-	Perform an in-depth analysis of the dataset to examine the distribution, structure, and characteristics of the collected Instagram images and captions. This step is essential to identify relevant patterns, assess data quality, and inform subsequent stages of feature extraction and modeling.
-	
-	\item \textbf{Extract and Fuse Multimodal Features from Images and Captions:} \\
-	Apply computer vision techniques to extract visual features from Instagram images—such as color schemes, composition, and depicted content—and natural language processing techniques to derive textual features from user captions—such as lexical diversity, sentiment, and linguistic style. These features will be fused to form a comprehensive representation of each user's social media activity.
-	
-	\item \textbf{Train Machine Learning Models for Personality Trait Prediction:} \\
-	Develop machine learning models that utilize the combined multimodal feature sets to predict users’ personality traits. The study will investigate the effectiveness of various learning algorithms and evaluate the benefits of integrating visual and textual data in improving predictive performance.
-	
-	\item \textbf{Evaluate the Predictive Performance of the Framework:} \\
-	Assess the effectiveness of the proposed multimodal personality recognition framework by comparing its performance to unimodal approaches that rely solely on either images or text. Evaluation will be based on appropriate metrics to determine predictive accuracy, robustness, and generalizability.
-\end{enumerate}
+	\item To determine and finalize the subset of data points to be used from the Instagram portion of PagkataoKo dataset.
+ 
+	\item To identify data characteristics of the Instagram subset of the PagkataoKo dataset that are relevant to APR.
 
-By achieving these objectives, this research aims to contribute to the field of personality computing by offering a comprehensive understanding of how Instagram content can be utilized for personality assessment, with a particular focus on the Filipino demographic.
+	\item To perform image and text feature extraction on the dataset based on previously identified characteristics.
+
+	\item To build personality prediction models using different feature sets and machine learning algorithms.
+
+ 	\item To identify which visual or textual features are most indicative of certain personality traits.
+
+	\item To evaluate the performance of the models using various metrics and compare the results to existing unimodal approaches.
+\end{enumerate}
 
 % This subsection states the over--all goal that must be achieved to answer the problem. Address the following: Given your research challenge or opportunity, how do you intend to solve it? What is the main outcome of your research? What kind of contribution do you want to achieve?
 
@@ -228,21 +221,41 @@ Specific Objective:
 \section{Scope and Limitations of the Research}
 \label{sec:scopelimitations}
 
-\begin{enumerate}[label=\textbf{ \arabic*:}, leftmargin=*]
-	\item \textbf{Using Classification Machine Learning Techniques:} This study focuses on classifying the personality traits from Instagram images. Thus, it uses classification techniques instead of regression where it determines the value in the interval.
-	 
-	\item \textbf{Edge Detection:} Many image processing techniques are used to expand the number of data points in the dataset. However, this study relies on edge detection techniques to extract the visual features from Instagram images, focusing on aspects such as color schemes, composition, and content, which have been linked to personality traits in previous studies.
+
+	This study aims to develop a multimodal personality recognition framework that predicts Filipino Instagram users' Big Five personality traits using both image and text data. The following outlines the scope, limitations, and rationale for each research objective.
 	
-	\item \textbf{Including Instagram Posts With Both Photo and Caption:} The dataset is filtered to have posts that contain both the photo and the caption.
+	\subsection{Perform exploratory data analysis (EDA) on the dataset}
 	
-	\item \textbf{The Big Five Personality Traits:} In evaluating the predictive performance of the framework, the analysis is based on the big five personality traits.
+	EDA is essential to understand the dataset's structure, distribution, and quality. It helps uncover patterns, inconsistencies, and potential biases within Instagram images and captions, informing subsequent feature extraction and modeling processes.
 	
-	\item \textbf{Limited to Philippine Demographics:} To effectively investigate the cultural factors that influence the expression of personality traits of the Filipino Instagram users, the dataset contains post made by Filipino Instagram users.
+	EDA will be performed exclusively on Instagram posts that contain both images and captions to ensure suitability for multimodal analysis. Posts lacking either modality are excluded. Social interaction metrics such as likes, comments, and follower counts are beyond the scope, as the study focuses solely on content based personality signals, not engagement behaviors.
 	
-	\item \textbf{Data Representation:} To represent a single instance in the dataset, both the text and image features will be normalized and compiled into one vector. The text feature to be fed into the machine learning is the \textit{caption}, the image features be the first five detected tag words.
+	\subsection{Structure and extract features from the image and text data}
+	Social media data is inherently unstructured and cannot be directly used for personality trait prediction. Preprocessing and feature extraction are required to convert images and captions into structured, machine readable formats that capture relevant personality related cues.
 	
-	\item \textbf{Categorization of Data:} The label of the data will be one of the personality trait in the OCEAN model. Because of the use of classification in machine learning, the classes of the label are "yes" and "no", meaning whether the person (the instance of the dataset) has the personality trait or not, respectively.
-\end{enumerate}
+	\textbf{Text processing:} \\
+	The study will process captions in any language, including English, Filipino, regional dialects, or other languages. Emojis, hashtags, and links will be minimally cleaned but retained as meaningful tokens (e.g., links will be tokenized as "[LINK]"). This approach acknowledges the linguistic diversity and multimodal expression patterns of Filipino users.
+	
+	\textbf{Image processing:} \\
+	The study will focus on two aspects:
+	
+	Photo Characteristics — including color, brightness, and image size.
+	
+	Image Content — identifying objects or scenes such as food, people, or locations.
+	
+	\subsection{Train Machine Learning Models for Personality Trait Prediction
+	}
+	
+	Model training operationalizes the proposed multimodal framework and enables empirical evaluation of its ability to predict personality traits based on extracted features.
+
+	The models are limited to classification based approaches to assign users to discrete personality categories. Support Vector Machines (SVM) and XGBoost will be utilized due to their strong performance and suitability for medium-scale datasets. Deep learning models, though powerful, are excluded to ensure interpretability and mitigate overfitting risks, considering dataset size.
+	
+	\subsection{Evaluate the predictive performance of the proposed multimodal framework}
+	
+	Evaluation determines whether integrating image and text data improves personality prediction compared to unimodal models.
+	
+	Evaluation is confined to within dataset testing using metrics such as Macro-F1 score and AUC-ROC. The study specifically targets Filipino Instagram users, limiting the generalizability of results to other populations, cultures, or platforms.
+	
 
 % This section discusses the boundaries, with respect to the objectives, of the research and the constraints within which the research will be developed. Describe what is and is not included in the scope of your research, supported by your main research question and findings of previous studies. Do not use weak excuses such as the lack of time and/or knowledge to perform the research.
 
@@ -266,13 +279,20 @@ Specific Objective:
 \section{Significance of the Study}
 \label{sec: Significance}
 
-To date, the use of image features in Automatic Personality Recognition (APR) research in the Philippine setting remains largely unexplored. This study addresses that gap by investigating how visual content—specifically images shared by Filipino Instagram users—can reveal aspects of personality. While existing personality prediction studies have predominantly relied on textual data from platforms such as Twitter, our work expands this scope by incorporating Instagram’s multimodal nature and combining both text and image features.
+This research addresses a critical gap in the emerging field of Filipino Automatic Personality Recognition (APR), particularly in the context of multimodal analysis. Rather than framing Filipino APR as a ``problem,'' this study recognizes it as a developing subfield that presents unique linguistic and cultural challenges requiring specialized approaches.
 
-By integrating visual elements with textual data in both English and Filipino, this research aims to determine whether personality prediction accuracy improves when using a multimodal approach compared to unimodal (text-only or image-only) methods. In doing so, this study not only introduces image-based analysis to Filipino APR but also examines how the fusion of modalities may enhance prediction performance.
+The majority of existing Filipino APR research focuses on text based data from platforms such as Twitter. While valuable, this narrow focus overlooks the rich, multimodal content shared on platforms like Instagram, where users express personality through both images and language.
 
-Additionally, this research contributes to addressing the underrepresentation of Filipino social media users in personality recognition studies. This research highlights the potential of culturally and linguistically inclusive models that better reflect the diversity of online users in the Philippines.
+This study makes several key contributions:
 
-Beyond academic contribution, the findings of this study may have practical applications in areas such as digital marketing, advertising, and social networking. As demonstrated in \citet{Matz2017} study on psychological targeting in digital marketing, aligning content with user personality traits can significantly boost engagement and conversion rates. Thus, insights from this research could inform strategies for more personalized and effective content delivery in online platforms.
+\begin{itemize}
+	\item It expands Filipino APR by integrating image and text modalities, building upon successful multimodal approaches from other contexts.
+	\item It acknowledges and addresses the complexities of Filipino linguistic expression, including code switching, emojis, and hashtags, which are prevalent in social media discourse.
+	\item By conducting exploratory data analysis (EDA), the study establishes a foundational understanding of Filipino Instagram data relevant to personality recognition.
+	\item The research demonstrates practical methods for multimodal feature extraction and fusion, tailored to the Philippine social media landscape.
+\end{itemize}
+
+Beyond academic contributions, this study informs the development of culturally sensitive personality computing systems. By highlighting the importance of multimodal, localized approaches, it lays the groundwork for future research and applications that better reflect the linguistic, cultural, and behavioral patterns of Filipino social media users.
 
 %%This section explains why research must be done in this area.  It rationalizes the objective of the research with that of the stated problem. Avoid including sentences such as ``This research will be beneficial to the proponent/department/college'' as this is already an inherent requirement of all BS and MS thesis projects.  Focus on the research's contribution to the Computer Science field.
 

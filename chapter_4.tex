@@ -2,150 +2,110 @@
 \label{sec:methodology}
 
 \section{Research Methodology}
+This chapter details the systematic, seven-stage research methodology designed to develop and evaluate a multimodal Automatic Personality Recognition (APR) framework for Filipino Instagram users. The framework is engineered to address the unique linguistic and cultural challenges present in the dataset, such as code-switching and distinct patterns of visual self-expression. The overall pipeline begins with data sourcing and filtering, followed by preprocessing, exploratory analysis, feature extraction from text, image, and metadata, and an intermediate fusion of these features. Finally, machine learning models are trained and rigorously analyzed to determine their predictive performance.
+%\begin{figure}[h]
+	%\centering
+	%\includegraphics[width=0.9\textwidth]{pipeline.pdf}
+	%\caption{Multimodal APR pipeline for Filipino Instagram users}
+	%\label{fig:pipeline}
+%\end{figure}
 
-Our multimodal personality recognition pipeline employs intermediate fusion to integrate image, text, and metadata features from Filipino Instagram users. The methodology consists of six key phases:
+\subsection{Data Source}
+\label{subsec:data}
+This research utilizes the Instagram subset of the PagkataoKo dataset, a comprehensive resource specifically created for Filipino APR studies. This dataset is uniquely suited for our study as it contains not only user-generated content like posts and images but also demographic information and self-reported Big Five personality scores, which are essential for supervised machine learning. The original Instagram subset contains data from 1,380 Filipino users, totaling 195,757 posts.
+
+To ensure data quality and suitability for a multimodal analysis that requires both visual and textual signals, specific inclusion criteria were established. First, only users with a minimum of five posts containing both an image and a caption were retained to guarantee a baseline level of activity and the presence of both data modalities. Second, users with more than 50\% missing captions or a high number of corrupted image files were excluded to maintain the integrity of the feature extraction process.
+
+%After applying these criteria, the final dataset for this study consists of 1,300 Filipino Instagram users (a retention of 94.2\% from the original subset) and 145,393 posts that include both an image and a caption. This filtered dataset provides a substantial foundation for analysis, with a mean of 111.8 posts per user (SD=210.3).
+
+For model training and evaluation, the dataset will be divided using a user-level stratified split: \textbf{70\% for training, 15\% for validation, and 15\% for testing}. This stratification ensures that the demographic distribution of age and gender in the original dataset is preserved across all splits, preventing sampling bias.
+
+%A notable obstacle encountered in the dataset is data loss resulting from the data collection methodology. A 17\% loss of image data occurred due to the expiration of image URLs before they could be downloaded, affecting approximately 350 users. Additionally, as Instagram allows posts without captions, about 9\% of the collected posts lack textual data, which limits the scope of text-based analysis for those specific entries. These factors will be carefully managed during the subsequent stages.
 
 \subsection{Preprocessing}
-\label{subsec:preprocessing}
+The purpose of the preprocessing stage is to clean and structure the raw data, making it suitable for feature extraction. This is a critical step to normalize multilingual text, handle platform-specific noise, and aggregate data into a usable format.
 
-\begin{itemize}
-	\item \textbf{Data Aggregation:}
-	\begin{itemize}
-		\item Posts are grouped by \texttt{UserID} to form user-level profiles.
-		\item Metadata such as \texttt{PostCount}, \texttt{Following Count}, and temporal posting patterns are extracted to serve as behavioral signals.
-	\end{itemize}
-	
-	\item \textbf{Missing Data Handling:}
-	\begin{itemize}
-		\item Posts without captions are retained for image-only analysis.
-		\item Missing text features are imputed using zero vectors.
-		\item Metadata-derived proxies such as \texttt{PostCount} act as activity indicators.
-	\end{itemize}
-\end{itemize}
+The primary task is \textbf{user-level aggregation}, where all posts, images, and metadata for a single user are compiled into a unified behavioral profile. This approach allows the models to learn from the entirety of a user's digital footprint rather than from disconnected, individual posts.
+
+Key steps in this stage now include a more detailed text cleaning process to prepare captions for the open-vocabulary analysis. As performed in the analysis of the PagkataoKo dataset itself, this involves:
+
+\textbf{Normalization and Tokenization:} All caption text will be lowercased to ensure consistency. The text will then be tokenized into individual words or sub-words.
+
+\textbf{Removal of Platform Artifacts: }Common social media artifacts with little linguistic value, such as URLs, user mentions, and hashtags, will be removed.
+
+\textbf{Stopword Removal: } A combined list of common English and Tagalog stopwords will be applied to filter out high-frequency but low-information words (e.g., "the", "ang", "is", "ay").
+
+Finally, the handling of missing data is addressed. For posts where captions are absent, text-based features will be handled using zero-imputation. To ensure that the absence of content does not mean the absence of a signal, a \texttt{PostCount} feature will be used as a proxy for a user's overall activity level.
 
 \subsection{Exploratory Data Analysis}
 \label{subsec:eda}
 
-\begin{itemize}
-	\item \textbf{Demographic Analysis:}
-	\begin{itemize}
-		\item Assesses geographic distribution (e.g., Luzon, Visayas, Mindanao).
-		\item Reviews age and gender representation.
-	\end{itemize}
-	
-	\item \textbf{Visual Pattern Discovery:}
-	\begin{itemize}
-		\item Identifies color dominance through HSV histograms.
-		\item Uses OpenCV’s Haar cascades for face detection (e.g., face count in selfies).
-	\end{itemize}
-	
-	\item \textbf{Temporal Trends:}
-	\begin{itemize}
-		\item Examines correlations between posting times and personality traits (e.g., late-night activity as potential Neuroticism signal).
-	\end{itemize}
-\end{itemize}
+Before feature extraction, an exploratory data analysis (EDA) will be conducted to understand the fundamental characteristics of the dataset. This analysis aims to identify demographic trends and content patterns that could inform feature engineering and model interpretation.
+
+The demographic distribution of the final 1,300-user subset, as derived from the PagkataoKo dataset paper, is summarized in Table 4.1. The data shows a user base that is predominantly young (49.3\% aged 18-20) and female (78.0\%). Linguistically, captions are overwhelmingly English-dominant (75.6\%), with a smaller portion being Tagalog-dominant (4.3\%) or exhibiting code-switching (19.4\%).
+
+\begin{table}[h]
+	\centering
+	\caption{Demographic distribution of Instagram subset (n=1,300)}
+	\label{tab:demo}
+	\begin{tabular}{lcc}
+		\hline
+		\textbf{Characteristic} & \textbf{Category} & \textbf{Percentage} \\ \hline
+		\textbf{Age} & 18-20 & 49.3\% \\
+		& 21-23 & 31.3\% \\
+		& 24-26 & 10.7\% \\
+		& $\geq$27 & 8.8\% \\ \hline
+		\textbf{Sex} & Female & 78.0\% \\
+		& Male & 20.0\% \\
+		& Intersex/ Declined & 2.0\% \\ \hline
+		\textbf{Language} & English-dominant & 75.6\% \\
+		& Tagalog-dominant & 4.3\% \\
+		& Code-switched & 19.4\% \\ \hline
+	\end{tabular}
+\end{table}
+
+Further analysis will focus on identifying patterns relevant to personality. This includes investigating \textbf{temporal patterns}, such as the relationship between posting times and personality traits (e.g., using Poisson regression to check for a correlation between late-night activity and Neuroticism). On the visual side, \textbf{visual trends }will be explored by analyzing HSV (Hue, Saturation, Value) histograms to identify color preferences across different demographic groups.
+
+A significant limitation in this phase is the inability to perform geographic analysis, as the dataset contains no location data.
 
 \subsection{Feature Extraction}
 \label{subsec:features}
 
-\begin{itemize}
-	\item \textbf{Image Features:}
-	\begin{itemize}
-		\item \textbf{VGG-19}: Extracts deep style and texture features from images (e.g., visual complexity).
-		\item \textbf{Object Detection}: Utilizes JSON metadata to infer social context (e.g., group photos linked to Extraversion).
-		\item Color features are derived using k-means clustering in HSV color space.
-	\end{itemize}
-	
-	\item \textbf{Text Features:}
-	\begin{itemize}
-		\item Captions are processed using LIWC categories, extended to include Tagalog.
-		\item Bilingual sentiment analysis is applied for English and Tagalog texts.
-	\end{itemize}
-	
-	\item \textbf{Metadata Features:}
-	\begin{itemize}
-		\item Behavioral signals such as \texttt{Following Count}, post frequency, and time-of-day activity are captured.
-	\end{itemize}
-\end{itemize}
+This stage focuses on converting the raw text, image, and metadata into quantitative features that machine learning models can process.
 
+\textbf{Image Features:}
+To capture high-level visual semantics from the images, this study will employ the \textbf{VGG-19} model, a deep convolutional neural network pre-trained on the ImageNet dataset. For each Instagram image, a \textbf{4,096-dimension feature vector} will be extracted from the second to last fully-connected layer (fc7). This layer is chosen because it captures abstract visual representations like textures and object compositions, which have been shown to be effective in correlating with personality traits. To quantify the social context of images, \textbf{object detection} will be performed using the provided Imagga JSON metadata. This will allow for the extraction of features such as face counts, which can be linked to traits like Extraversion. Finally, \textbf{color analysis} will be conducted by generating HSV histograms for each image. K-means clustering (with k=5) will then be applied to these histograms to identify dominant color palettes, as color preferences have been previously associated with personality.
+
+\textbf{Text Features:}
+In place of a predefined lexical dictionary, this study will adopt an open-vocabulary approach to extract textual features. This method allows the models to learn directly from the linguistic patterns present in the users' captions without being constrained to a fixed dictionary. This approach is not only robust in handling the code-switched nature of the data but is also supported by previous work on Filipino APR that found term-frequency features to be effective. Two types of features will be extracted:
+
+\textbf{TF-IDF Representation}: Term Frequency-Inverse Document Frequency (TF-IDF) will be used to capture the importance of words in a user's collection of captions. The process will involve creating a vocabulary of unigrams and bigrams from the preprocessed text. A TF-IDF vectorizer will then transform each user's aggregated text into a sparse vector, where each dimension corresponds to a term in the vocabulary, and the value represents the term's weighted importance. This method is effective at highlighting words that are characteristic of a specific user compared to the entire corpus.
+
+\textbf{Word Embedding Representation}: To capture the semantic meaning of the text, pre-trained FastText word embeddings will be used. The PagkataoKo dataset paper notes that these embeddings provide excellent coverage for both English and Tagalog words found in the dataset. For each user, the embeddings for all words in their captions will be aggregated by computing the mean of the vectors. This results in a single, dense vector for each user that represents the overall semantic content of their posts. These pre-trained vectors were developed by \citet{grave2018} and are well-suited for this task due to their ability to handle multilingual text.
+
+\textbf{Bilingual Sentiment}: To retain sentiment as a distinct feature, the VADER model will be used for English text, while a customized lexicon will be applied to Tagalog portions of the captions.
+
+\textbf{Metadata Features: }
+Behavioral signals will be extracted from user account metadata. Features such as the \texttt{Following Ratio} (following/followers) and \texttt{Post Frequency} will be calculated and scaled using min-max normalization to serve as indicators of a user's social media activity patterns.
 \subsection{Intermediate Feature Fusion}
 \label{subsec:fusion}
+The objective of this stage is to combine the features extracted from the different modalities (image, text, and metadata) into a single, unified representation for each user. This process, known as intermediate fusion, is intended to maximize the complementary signals from each data source while managing dimensionality.
 
-To integrate the diverse feature types, we use an intermediate fusion strategy at the feature level:
-
-\begin{enumerate}
-	\item \textbf{Modality-Specific Encoding:}
-	\begin{itemize}
-		\item Image features: VGG-19 embeddings (4,096 dimensions).
-		\item Text features: TF-IDF-weighted LIWC vectors.
-		\item Metadata features: Min-max scaled numeric values.
-	\end{itemize}
-	
-	\item \textbf{Concatenation:} A unified multimodal feature vector is formed for each user.
-	
-	\item \textbf{Dynamic Weighting:} An attention-based mechanism dynamically prioritizes modalities depending on trait:
-	\begin{itemize}
-		\item Image features are weighted more for Openness.
-		\item Text features are emphasized for Neuroticism.
-	\end{itemize}
-\end{enumerate}
+The fusion process begins with modality-specific standardization. To reduce the high dimensionality of the VGG-19 image features and retain the most variant information, Principal Component Analysis (PCA) will be applied. Following standardization, the feature vectors from all modalities will be concatenated to form a single, comprehensive feature vector for each user. While dynamic weighting of features was initially considered, this approach has been removed from the scope of this study to maintain methodological simplicity and focus on the primary research objectives.
 
 \subsection{Model Training}
 \label{subsec:models}
 
-Each personality trait is modeled independently using both single-modality and fused feature vectors.
+Two distinct classification models will be trained to predict the Big Five personality traits: a Support Vector Machine (SVM) and an XGBoost classifier. The implementation of these models will be carried out using the \texttt{scikit-learn} \citet{pedregosa2011} and \texttt{XGBoost} \citet{chen2016}  Python libraries.
 
-\subsubsection{Support Vector Machines (SVM)}
-\label{subsubsec:svm}
+An SVM with a Radial Basis Function (RBF) kernel will be employed, as this configuration is highly effective at handling high-dimensional and potentially sparse data, which is characteristic of our fused feature set. A grid search will be performed to optimize the hyperparameters \texttt{C} and \texttt{gamma} for the best classification performance.
 
-\begin{itemize}
-	\item \textbf{Rationale:}
-	\begin{itemize}
-		\item Well-suited for high-dimensional data \cite{farnadi2018}.
-		\item RBF kernel captures non-linear patterns.
-		\item Performs reliably with medium-scale datasets and is robust against overfitting.
-	\end{itemize}
-	
-	\item \textbf{Implementation:}
-	\begin{itemize}
-		\item Hyperparameters (\texttt{C}, \texttt{gamma}) are optimized via grid search.
-		\item Class weights are balanced to address trait distribution imbalances.
-	\end{itemize}
-\end{itemize}
-
-\subsubsection{XGBoost}
-\label{subsubsec:xgboost}
-
-\begin{itemize}
-	\item \textbf{Rationale:}
-	\begin{itemize}
-		\item Handles heterogeneous and structured data efficiently \cite{chen2016}.
-		\item Provides built-in tools for feature importance analysis.
-	\end{itemize}
-	
-	\item \textbf{Implementation:}
-	\begin{itemize}
-		\item Early stopping is applied to prevent overfitting.
-		\item Key parameters: \texttt{max\_depth=6}, \texttt{learning\_rate=0.1}, and 500 estimators.
-	\end{itemize}
-\end{itemize}
+An XGBoost classifier will also be trained, as this gradient boosting algorithm is robust in handling heterogeneous features (i.e., a mix of sparse and dense data from different sources) and includes a built-in mechanism for analyzing feature importance. The model will be configured with a  \texttt{max\_depth} of 6 and a \texttt{learning\_rate} of 0.1, and an early stopping mechanism will be used to prevent overfitting during training.
 
 \subsection{Model Analysis}
 \label{subsec:analysis}
+A thorough analysis will be conducted to evaluate the performance of the trained models. The primary evaluation metrics will be the \texttt{Macro-F1 score} and the \texttt{Area Under the Receiver Operating Characteristic Curve (AUC-ROC)}. The Macro-F1 score is chosen because it is well-suited for datasets with class imbalance, providing an unweighted average of the F1 score for each class. The AUC-ROC will be used to assess the model's ability to rank and distinguish between classes.
 
-We evaluate both single- and multimodal models using the following criteria:
+To ensure the interpretability of the models, \texttt{SHAP (SHapley Additive exPlanations)} values will be calculated. This will allow for the quantification of each modality's contribution to the final predictions, revealing which features (image, text, or metadata) are most influential.
 
-\begin{itemize}
-	\item \textbf{Evaluation Metrics:}
-	\begin{itemize}
-		\item Macro-F1 score to account for class imbalance.
-		\item AUC-ROC to measure discriminatory power across traits.
-		\item SHAP values to enhance model interpretability.
-	\end{itemize}
-	
-	\item \textbf{Ablation Studies:}
-	\begin{itemize}
-		\item Assess the contribution of each modality.
-		\item Compare performance of single versus fused modalities.
-	\end{itemize}
-\end{itemize}
+Finally, \texttt{ablation studies} will be conducted to systematically compare the performance of the full multimodal models against unimodal models (e.g., text-only and image-only). This will isolate the performance impact of each modality and definitively determine whether the fusion of image and text features leads to a significant improvement in personality prediction accuracy.
