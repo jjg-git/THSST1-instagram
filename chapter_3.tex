@@ -64,6 +64,19 @@ In this model, $g(z')$ is the explanation model that approximates the original m
 
 \section{Personality Theory}
 
-This research operationalizes personality using the \textit{Big Five Personality Traits} model (McCrae \& Costa, 1999), encompassing Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism. The Big Five framework offers a robust, empirically validated structure for personality assessment, serving as the ground truth for supervised model training.
+This research operationalizes personality using the \textit{Big Five Personality Traits} model \citep{costa1999five}, also known as the Five Factor Model (FFM). The Big Five personality model was formed over time through research from the idea that personality is rooted in our natural language. A lexical approach was used to extract thousands of relevant words from the English dictionary, which were then narrowed down by exploratory factor analysis, resulting in the final five traits \citep{feher2021looking}. The term “Big Five” was coined by Goldberg in 1981, referring to the model’s comprehensive coverage of personality. The Big Five model comprises the following personality traits:
 
-Recent advancements in computational personality recognition, including deep learning and multimodal approaches (Mehta et al., 2019; Naz et al., 2025), provide a strong theoretical basis for leveraging Instagram content in trait prediction tasks.
+\begin{enumerate}
+	\item \textbf{Extraversion:} \\
+	This trait describes an interest in other people and the external world. High-scoring individuals are more outgoing and energetic, while low scorers are described as more solitary and introspective. 
+	\item \textbf{Agreeableness:} \\
+ 	This trait describes a person’s willingness to cooperate and compromise with others, or the ease with which they co-exist with other people. High-scoring individuals are seen as more accommodating, empathetic, and passive, while low scorers may appear argumentative and confrontational. 
+	\item \textbf{Conscientiousness:} \\
+	This trait describes the care and meticulousness put into one’s activities, relating to traits such as self-discipline and attention to detail.. High-scoring individuals tend to be organized and efficient, while low scorers may appear disorderly but more easygoing and spontaneous.
+	\item \textbf{Neuroticism:} \\
+	This trait describes a person’s tendency towards negative emotions and their emotional vulnerability to unfavorable scenarios. High-scoring individuals tend to be reactive and nervous, with their mental state being more easily influenced, while low scorers are emotionally stable, confident, and secure.
+	\item \textbf{Openness to Experience:} \\
+	This trait describes a person’s willingness to subject themselves to new, unfamiliar experiences and situations, and is also related to creativity. High-scoring individuals are curious, open-minded, and more open to trying new things, while low scorers are more cautious, preferring consistency and familiarity. 
+\end{enumerate}
+
+These five factors are considered statistically independent, meaning that a high or low score in one trait does not predict scores in the others \citep{babcock2020big}. There are numerous existing questionnaires that are used to assess these traits, such as the Big Five Inventory (BFI), the various versions of the NEO Personality Inventory, and the Big-Five Factor Markers. Research has also shown that these traits generally remain stable and consistent throughout adulthood \citep{babcock2020big}. However, there is an acknowledgement that while these five traits encompass a large area of personality, it does not claim to capture all aspects \citep{babcock2020big}. For instance, an alternative personality model, the HEXACO model, was developed based on the Big Five. It names a sixth dimension: Honesty-Humility, which was obtained by applying the lexical approach to multiple languages around the world. It also defines the base five traits slightly differently than the Big Five does \citep{feher2021looking}. Furthermore, it should be noted that the Big Five model was developed in a Western context, meaning that personality nuances of non-Western cultures may not be adequately captured with this model \citep{feher2021looking}.
