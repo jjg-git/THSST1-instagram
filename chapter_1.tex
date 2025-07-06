@@ -229,26 +229,41 @@ Specific Objective:
 \label{sec:scopelimitations}
 
 
-	This study aims to develop a multimodal personality recognition framework that predicts Filipino Instagram users' Big Five personality traits using both image and text data. The following outlines the scope, limitations, and rationale for each research objective.
-	
+	This study aims to develop a multimodal personality recognition framework that predicts Filipino Instagram users’ Big Five personality traits using both image and text data. The following outlines the scope, limitations, and rationale for each research objective.
 	\subsection{Perform exploratory data analysis (EDA) on the dataset}
 	
-	EDA is essential to understand the dataset's structure, distribution, and quality. It helps uncover patterns, inconsistencies, and potential biases within Instagram images and captions, informing subsequent feature extraction and modeling processes.
+	EDA is essential to understand the dataset’s structure, distribution, and quality. It helps uncover patterns, inconsistencies, and potential biases within Instagram images and captions, informing subsequent feature extraction and modeling processes.
 	
-	EDA will be performed exclusively on Instagram posts that contain both images and captions to ensure suitability for multimodal analysis. Posts lacking either modality are excluded. Social interaction metrics such as likes, comments, and follower counts are beyond the scope, as the study focuses solely on content based personality signals, not engagement behaviors.
+	The study focuses exclusively on Instagram posts that contain both images and captions to ensure suitability for multimodal analysis. Posts lacking either modality are excluded. Social interaction metrics such as likes, comments, and follower counts are beyond the scope, as the study emphasizes content-based personality signals, not engagement behaviors.
 	
 	\subsection{Structure and extract features from the image and text data}
-	Social media data is inherently unstructured and cannot be directly used for personality trait prediction. Preprocessing and feature extraction are required to convert images and captions into structured, machine readable formats that capture relevant personality related cues.
+	Social media data is inherently unstructured and cannot be directly used for personality trait prediction. Preprocessing and feature extraction are required to convert images and captions into structured, machine-readable formats that capture relevant personality-related cues.
 	
-	\textbf{Text processing:} \\
-	The study will process captions in any language, including English, Filipino, regional dialects, or other languages. Emojis, hashtags, and links will be minimally cleaned but retained as meaningful tokens (e.g., links will be tokenized as "[LINK]"). This approach acknowledges the linguistic diversity and multimodal expression patterns of Filipino users.
+	The study will process captions in any language, including English, Filipino, regional dialects, or other languages that may be present in the dataset. The presence of multiple languages is acknowledged as a natural characteristic of Filipino Instagram use, particularly given code-switching tendencies and the multicultural linguistic environment. However, the primary analytical focus remains on English and Filipino captions, as these are the most prevalent based on prior research and the PagkataoKo dataset. Emojis, hashtags, and links will be minimally cleaned but retained as meaningful tokens (e.g., links will be tokenized as “[LINK]”), recognizing their relevance in expressing personality and emotion.
 	
-	\textbf{Image processing:} \\
-	The study will focus on two aspects:
+	The study recognizes that Instagram is a highly visual platform, and the images shared by users offer rich, often spontaneous cues that can be indicative of personality traits. To effectively extract relevant information, this research employs a two-pronged image processing approach:
 	
-	Photo Characteristics — including color, brightness, and image size.
+	\begin{enumerate}
+		\item \textbf{Photo Characteristics Analysis} \\
+		This aspect focuses on the low-level visual properties of the images, which previous studies have shown to correlate with personality traits. Specifically, the following features will be extracted:
+		
+		\begin{itemize}
+			\item \textbf{Color Composition}: Using color space transformations (e.g., HSV color space) and clustering techniques (e.g., k-means clustering), dominant colors will be identified. Research has indicated that certain colors, such as warmer hues (e.g., red, orange) are associated with Openness, while cooler tones (e.g., blue) may relate to Conscientiousness.
+			\item \textbf{Brightness and Saturation}: Global image brightness and saturation levels will be computed, as these have been linked to personality traits such as Extraversion (associated with brighter, more saturated images) and Neuroticism (darker, muted images).
+			\item \textbf{Image Size and Resolution}: Image dimensions and resolution will be recorded to account for possible differences in image quality or user posting behavior that may relate to personality traits.
+		\end{itemize}
+		
+		\item \textbf{Image Content Analysis} \\
+		Beyond visual aesthetics, the semantic content of images provides higher-level cues relevant to personality. The following techniques will be employed to extract content-based features:
+		
+		\begin{itemize}
+			\item \textbf{Object and Scene Detection}: Pre-trained deep learning models, such as the Google Vision API or similar object recognition frameworks, will be used to identify objects, people, and common scenes present in the images. For example, frequent posting of selfies or group photos may indicate higher levels of Extraversion, while nature scenes or artistic compositions may signal Openness.
+			\item \textbf{Face Detection and Count}: Using algorithms such as OpenCV's Haar cascades, the presence and quantity of faces in an image will be detected. This serves as a proxy for social engagement tendencies, as prior research has linked higher face presence with Extraversion.
+			\item \textbf{Contextual Features}: Where possible, image metadata or contextual tags (e.g., inferred location such as beaches, cafes, or landmarks) will be utilized to enrich content understanding.
+		\end{itemize}
+	\end{enumerate}
 	
-	Image Content — identifying objects or scenes such as food, people, or locations.
+	All image features, both low-level and high-level, will be converted into structured, machine-readable formats to be integrated with textual features in the multimodal personality recognition framework.
 	
 	\subsection{Train Machine Learning Models for Personality Trait Prediction
 	}
@@ -286,19 +301,26 @@ Specific Objective:
 \section{Significance of the Study}
 \label{sec: Significance}
 
-This research addresses a critical gap in the emerging field of Filipino Automatic Personality Recognition (APR), particularly in the context of multimodal analysis. Rather than framing Filipino APR as a ``problem,'' this study recognizes it as a developing subfield that presents unique linguistic and cultural challenges requiring specialized approaches.
+The field of Filipino Automatic Personality Recognition (APR) is still emerging, presenting unique challenges due to the country's linguistic diversity and rich cultural context. While progress has been made, existing research remains largely limited to text-based analysis, particularly from platforms such as Twitter. This study seeks to expand Filipino APR by exploring the use of multimodal data — specifically, integrating both image and text content from Instagram.
 
-The majority of existing Filipino APR research focuses on text based data from platforms such as Twitter. While valuable, this narrow focus overlooks the rich, multimodal content shared on platforms like Instagram, where users express personality through both images and language.
+The expansion of Filipino APR towards multimodal analysis is especially important given that Instagram users express themselves through both language and visual content. Although global research suggests that multimodal approaches can enhance personality prediction, such methods have not been sufficiently explored in the Filipino context. This study aims to investigate this gap rather than assume its success, with the goal of evaluating whether visual text integration can enrich personality inference for Filipino Instagram users.
 
-This study makes several key contributions:
+In line with this, the study offers the following contributions:
 
 \begin{itemize}
-	\item It expands Filipino APR by integrating image and text modalities, building upon successful multimodal approaches from other contexts.
-	\item It acknowledges and addresses the complexities of Filipino linguistic expression, including code switching, emojis, and hashtags, which are prevalent in social media discourse.
-	\item By conducting exploratory data analysis (EDA), the study establishes a foundational understanding of Filipino Instagram data relevant to personality recognition.
-	\item The research demonstrates practical methods for multimodal feature extraction and fusion, tailored to the Philippine social media landscape.
+	\item It explores the use of multimodal data (image and text) for Filipino APR, addressing the current research gap and assessing whether this approach can meaningfully improve personality prediction.
+	
+	\item It acknowledges and addresses the complexities of Filipino linguistic expression, including:
+	\begin{itemize}
+		\item Code switching between English, Filipino, and regional dialects;
+		\item The frequent use of emojis, hashtags, and links;
+		\item Multimodal communication patterns prevalent on Instagram.
+	\end{itemize}
+	
+	\item It conducted exploratory data analysis (EDA) on Filipino Instagram data to establish an empirical foundation for understanding content patterns relevant to personality traits.
+	
+	\item The research demonstrates practical methods for multimodal feature extraction and fusion, tailored to the Philippine social media landscape. This ensures that the methodologies account for both cultural and technological realities of how Filipinos express themselves online.
 \end{itemize}
-
 Beyond academic contributions, this study informs the development of culturally sensitive personality computing systems. By highlighting the importance of multimodal, localized approaches, it lays the groundwork for future research and applications that better reflect the linguistic, cultural, and behavioral patterns of Filipino social media users.
 
 %%This section explains why research must be done in this area.  It rationalizes the objective of the research with that of the stated problem. Avoid including sentences such as ``This research will be beneficial to the proponent/department/college'' as this is already an inherent requirement of all BS and MS thesis projects.  Focus on the research's contribution to the Computer Science field.
@@ -333,7 +355,7 @@ The methods involved in the creation of the PagkataoKo dataset were reviewed and
 	\item \textbf{Data Restrictions:}
 	\begin{itemize}
 		\item The dataset is used strictly for academic research purposes and is not intended for any commercial exploitation.
-		\item Re-identification of users is explicitly prohibited, and no attempts were made to reconstruct individual profiles or trace behavior back to specific persons.
+		\item Reidentification of users is explicitly prohibited, and no attempts were made to reconstruct individual profiles or trace behavior back to specific persons.
 	\end{itemize}
 \end{itemize}
 
