@@ -38,12 +38,29 @@ Following Liu et al. (2022) and Kampman et al. (2018), this research adopts an i
 
 To model the relationship between extracted multimodal features and personality traits, this study employs established supervised learning algorithms:
 
-\begin{itemize}
-	\item \textbf{Support Vector Machines (SVM):} SVMs are well suited for high dimensional feature spaces, using kernel functions (e.g., Radial Basis Function) to capture non linear relationships within the data.
-	\item \textbf{Extreme Gradient Boosting (XGBoost):} XGBoost, a tree ensemble method, efficiently handles structured data and provides built in mechanisms for feature importance analysis and overfitting control.
-\end{itemize}
+\subsection{Logistic Regression}
+\textbf{Logistic Regression (LR)} is a linear model used for binary classification. It calculates the probability of an instance belonging to a class using the sigmoid function, which maps a linear combination of features to a value between 0 and 1. The probability is given by:
+$$P(y=1 | \mathbf{x}) = \frac{1}{1 + e^{-(\mathbf{w} \cdot \mathbf{x} + b)}}$$
+where $P(y=1|\mathbf{x})$ is the probability of the positive class given the input feature vector $\mathbf{x}$, $\mathbf{w}$ represents the feature weights, and $b$ is the bias term.
 
-These algorithms have demonstrated strong performance in prior personality recognition research (Kazameini et al., 2020; Naz et al., 2025).
+\subsection{Support Vector Machines}
+\textbf{Support Vector Machines (SVMs)} are well-suited for high-dimensional feature spaces. For classification, an SVM seeks to find the optimal hyperplane that best separates the data points of different classes by maximizing the margin between them. The optimization problem for a soft-margin SVM is formulated as:
+$$\min_{\mathbf{w}, b, \xi} \frac{1}{2} \|\mathbf{w}\|^2 + C \sum_{i=1}^{n} \xi_i$$
+subject to the constraints $y_i(\mathbf{w} \cdot \mathbf{x}_i - b) \geq 1 - \xi_i$ and $\xi_i \geq 0$. Here, $C$ is a regularization parameter that controls the trade-off between maximizing the margin and minimizing classification errors, represented by the slack variables $\xi_i$. SVMs can capture non-linear relationships using the kernel trick, where the dot product is replaced by a kernel function, $K(\mathbf{x}_i, \mathbf{x}_j)$.
+
+\subsection{Extreme Gradient Boosting (XGBoost)}
+\textbf{Extreme Gradient Boosting (XGBoost)} is a powerful tree-based ensemble method. It builds a series of decision trees sequentially, where each new tree corrects the errors of the previous ones. The final prediction is an aggregate of the predictions from all trees. The objective function that XGBoost minimizes combines a loss function and a regularization term:
+$$\text{Obj} = \sum_{i=1}^{n} l(y_i, \hat{y}_i) + \sum_{k=1}^{K} \Omega(f_k)$$
+where $l(y_i, \hat{y}_i)$ is the loss function that measures the error between the true label $y_i$ and the prediction $\hat{y}_i$, and $\Omega(f_k)$ is the regularization term that penalizes the complexity of the $k$-th tree to prevent overfitting.
+
+\section{Model Interpretability Theory}
+\label{sec:interpretability_theory}
+To ensure the transparency and trustworthiness of the predictive models, this study will employ a state-of-the-art model explanation framework.
+
+\subsection{SHAP (SHapley Additive exPlanations)}
+SHAP is a game-theoretic approach used to explain the output of any machine learning model. It computes the contribution of each feature to a specific prediction. The core of SHAP is the additive feature attribution model, which represents an explanation as a linear function of binary variables:
+$$g(z') = \phi_0 + \sum_{j=1}^{M} \phi_j z'_j$$
+In this model, $g(z')$ is the explanation model that approximates the original model's output, $z' \in \{0, 1\}^M$ indicates the presence or absence of a feature, $M$ is the number of features, $\phi_0$ is the base value (the average prediction over the dataset), and $\phi_j$ is the \textbf{SHAP value} for feature $j$. This value represents the feature's contribution to pushing the model's output away from the base value.
 
 \section{Personality Theory}
 

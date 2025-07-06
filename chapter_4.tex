@@ -1,13 +1,14 @@
 \chapter{Methodology}
 \label{sec:methodology}
 
-This chapter outlines the seven-stage research method designed to create and assess a multimodal Automatic Personality Recognition (APR) framework for Filipino Instagram users. This framework will tackle the specific language and cultural challenges found in the dataset, including code switching and unique patterns of visual self-expression. The process starts with exploratory data analysis, followed by preprocessing and feature extraction from text, images, and metadata. It also includes an intermediate combination of these features. Finally, we will train machine learning models and thoroughly evaluate them to see how well they perform in predicting outcomes.
-%\begin{figure}[h]
-	%\centering
-	%\includegraphics[width=0.9\textwidth]{pipeline.pdf}
-	%\caption{Multimodal APR pipeline for Filipino Instagram users}
-	%\label{fig:pipeline}
-%\end{figure}
+This chapter outlines the seven-stage research method designed to create and assess a multimodal Automatic Personality Recognition (APR) framework for Filipino Instagram users. This framework will tackle the specific language and cultural challenges found in the dataset, including code switching and unique patterns of visual self-expression. The process starts with exploratory data analysis, followed by preprocessing and feature extraction from text, images, and metadata. It also includes an early combination of these features. Finally, we will train machine learning models and thoroughly evaluate them to see how well they perform in predicting outcomes.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{Methodology Flowchart.pdf}
+	\caption{Methodology Flowchart}
+	\label{fig:methodology_pipeline}
+\end{figure}
 
 \section{Data Source}
 \label{sec:data}
@@ -15,7 +16,13 @@ This research uses the Instagram subset of the PagkataoKo dataset, a resource sp
 
 We will set specific inclusion criteria to ensure data quality and suitability for a multimodal analysis. The  thresholds that will be based on EDA findings to achieve an optimal balance between data quantity and quality. 
 
-For model training and evaluation, the dataset will be divided using a user-level stratified split for model training and evaluation: 70\% for training, 15\% for validation, and 15\% for testing. This stratification ensures that the demographic distribution of age and gender in the original dataset is preserved across all splits, which helps prevent sampling bias.
+\subsection{Personality Score Transformation to Labels}
+In its raw form, the PagkataoKo dataset provides personality scores as continuous numerical values ranging from 1.0 to 5.0 for each of the Big Five traits. Since this study frames personality recognition as a classification task, these continuous scores must be transformed into discrete labels.
+
+To achieve this, a \textbf{median split} will be performed for each of the five personality traits independently. For a given trait (e.g., Openness), users with a score above the median value for that trait will be assigned the 'High' label (e.g., 'High-Openness'). Users with scores at or below the median will be assigned the 'Low' label (e.g., 'Low-Openness'). This process will result in five separate binary labeling schemes, one for each personality dimension, which will serve as the target variables for the classification models.
+
+\subsection{Data Splitting}
+For model training and evaluation, the dataset will be divided using a user-level stratified split for model training and evaluation: \textbf{70\%} for training, \textbf{15\%}for validation, and \textbf{15\%} for testing. To ensure that the proportion of 'High' and 'Low' labels for each personality trait is consistent across these sets, the split will be stratified based on the generated personality labels. This helps prevent model bias and ensures that the models are trained and evaluated on representative distributions of each personality class.
 
 \section{Preprocessing}
 This stage cleans and organizes the raw data to make it suitable for feature extraction. It is important to normalize multilingual text, manage platform-specific noise, and combine data into a usable format. The main task is \textbf{user-level aggregation}. Here, all posts, images, and metadata for a single user are collected into a single behavioral profile. This method lets the models learn from a user's digital footprint.
@@ -54,8 +61,6 @@ The demographic distribution of the final 1,300-user subset, as derived from the
 	\end{tabular}
 \end{table}
 
-Further analysis will target patterns related to personality. This will include looking at timing patterns, such as the link between posting times and personality traits, like using Poisson regression to explore a possible connection between late-night activity and neuroticism. We will also examine visual trends by analyzing HSV (Hue, Saturation, Value) histograms to identify color preferences among different demographic groups.
-
 
 \section{Feature Extraction}
 \label{subsec:features}
@@ -76,9 +81,14 @@ Instead of using a fixed lexical dictionary, this study will take an open-vocabu
 \textbf{Metadata Features: }
 Behavioral signals will be extracted from user account metadata. Features like the Following Ratio (following/followers) and Post Frequency will be calculated and scaled using min-max normalization to show a user's social media activity patterns.
 
-\section{Intermediate Feature Fusion}
+\section{Feature Selection}
+Following feature extraction, a feature selection step will be implemented to identify the most relevant predictors for each personality trait. This will be accomplished using the \textbf{Chi-Squared ($\chi^2$) test of independence}, a statistical method well-suited for classification tasks with categorical labels.
+
+The test will be used to evaluate the association between each extracted feature and the binary 'High'/'Low' personality labels. For numerical features, such as TF-IDF scores and metadata values, discretization will be applied to convert them into categorical bins. Features that show a statistically significant association with a personality label (indicated by a low p-value) will be selected for inclusion in the final feature set used for model training. This process helps to reduce model complexity and focus the learning on the most informative signals in the data.
+
+\section{Early Feature Fusion}
 \label{subsec:fusion}
-This stage combines features extracted from different sources, including image, text, and metadata, into one unified representation for each user. It aims to make the most of the complementary signals from each data source while keeping dimensionality in check. 
+This stage employs \textbf{early fusion}(also known as feature-level fusion) features extracted from different sources, including image, text, and metadata, into one unified representation for each user. It aims to make the most of the complementary signals from each data source while keeping dimensionality in check. 
 
 The fusion process starts with standardizing each modality. To lower the high dimensionality of the \texttt{VGG-19} image features and keep the most important information, we will apply \texttt{Principal Component Analysis (PCA)}. After standardization, we will concatenate the feature vectors from all modalities to create a single feature vector for each user. 
 
