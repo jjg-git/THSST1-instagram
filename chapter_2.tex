@@ -52,9 +52,19 @@ geneity Entropy Neural Network (HENN)) to integrate both textual and visual feat
 
 \section{Multimodal Approaches to APR}
 \label{sec: MMApproaches}
-Studies focusing on APR use multimodal data, meaning the input data are in different types, such as text, images, emoticons, audio, video, etc. They exhibit more accurate personality trait results than those of studies that only use one type of data, due to more features to learn. Multimodal studies use fusion techniques according to the order in the machine leraning process: early fusion and late fusion.
+Studies focusing on APR use multimodal data, meaning the input data are in different types, such as text, images, emoticons, audio, video, etc. They exhibit more accurate personality trait results than those of studies that only use one type of data, due to more features to learn. Multimodal studies use fusion techniques according to the order in the machine learning process: feature-level fusion and decision-level fusion.
 
+Feature-level fusion combine features of different modalities into a single feature set, which poses a disadvantage due to the higher dimensionality of the resulting feature set. 
 
+On the other hand, the decision-level fusion chooses features from a stream of input multimodal data by a set criteria. However, it has an assumption that the data of different multimodalities are mutually exclusive.
+
+In \citet{Sidorov2014}'s study that involved classification from "emotionally colored" conversation, they utilized feature-level fusion, despite that they recognized decision-level to be better. Due to the nature of the decision-level fusion where the data for each modalities are independent or mutually exclusive, feature-level fusion was used.
+
+\citet{Salam2022}'s personalized personality prediction model used decision-level fusion to combine video and audio features, along with Neural Architecture Search (NAS) to optimize Deep Neural Networks (DNNs) for different user demographics.
+
+Another example of a feature-level fusion was \citet{Abozaid2024}'s study where they developed a model to recognize faces with face masks. Two fusions were used, which are the feature-level fusion and the score fusion to learn between the original face and the masked face.
+
+Each study demonstrated the different strengths of the feature-level fusion and the decision-level fusion.
 
 \section{Filipino APR}
 \label{sec: FilipinoAPR}
