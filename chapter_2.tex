@@ -52,30 +52,19 @@ geneity Entropy Neural Network (HENN)) to integrate both textual and visual feat
 
 \section{Multimodal Approaches to APR}
 \label{sec: MMApproaches}
-Studies focusing on APR use multimodal data, meaning the input data are in different types, such as text, images, emoticons, audio, video, etc. They exhibit more accurate personality trait results than those of studies that only use one type of data, due to more features to learn. Multimodal studies use fusion techniques according to the order in the machine leraning process: early fusion and late fusion.
+Studies focusing on APR use multimodal data, meaning the input data are in different types, such as text, images, emoticons, audio, video, etc. They exhibit more accurate personality trait results than those of studies that only use one type of data, due to more features to learn. Multimodal studies use fusion techniques according to the order in the machine learning process: feature-level fusion and decision-level fusion.
 
-The earliest multimodal APR studies primarily focused on audio and visual features extracted from recorded conversations and behavioral interactions. \citet{Pianesi2008} conducted a study on multimodal behavioral analysis in multi-party meetings, utilizing SVM classifiers to predict Big Five personality traits and Locus of Control based on speech and facial expressions. Their results showed that facial features contributed significantly to extraversion classification, while vocal features were more informative for conscientiousness.
+Feature-level fusion combine features of different modalities into a single feature set, which poses a disadvantage due to the higher dimensionality of the resulting feature set. 
 
-Following this, \citet{Sidorov2014} employed a similar audio-visual approach using data from the SEMAINE dataset, which consists of emotionally colored conversations. The study evaluated different segmentation techniques to improve classification accuracy, concluding that shorter segments provided better performance for certain personality traits.
+On the other hand, the decision-level fusion chooses features from a stream of input multimodal data by a set criteria. However, it has an assumption that the data of different multimodalities are mutually exclusive.
 
-Expanding on audio-visual models, \citet{Lima2022} introduced a deep learning approach, incorporating text data alongside audio and visual cues. Their research used Recurrent Neural Networks (RNNs) to process sequential multimodal data, extracting temporal dependencies in social interactions. Their model was trained on 9.1 million parameters, demonstrating the scalability and computational complexity of deep learning-based APR systems.
+In \citet{Sidorov2014}'s study that involved classification from "emotionally colored" conversation, they utilized feature-level fusion, despite that they recognized decision-level to be better. Due to the nature of the decision-level fusion where the data for each modalities are independent or mutually exclusive, feature-level fusion was used.
 
-As social media platforms became a dominant mode of communication, researchers shifted towards analyzing text and image data to infer personality traits. \citet{Machajdik2010} introduced an affective image classification model, which extracted color, texture, and composition-based features to predict emotional responses. Although not directly designed for personality classification, their findings laid the foundation for future studies connecting visual aesthetics with personality traits.
+\citet{Salam2022}'s personalized personality prediction model used decision-level fusion to combine video and audio features, along with Neural Architecture Search (NAS) to optimize Deep Neural Networks (DNNs) for different user demographics.
 
-\citet{Xianyu2016} extended this approach by introducing a heterogeneity-entropy-based deep learning framework that combined text, images, and social media interactions. Their model used Deep Belief Networks (DBNs) and Autoencoders to extract latent personality features, highlighting how unsupervised learning techniques can capture subtle personality cues across modalities.
+Another example of a feature-level fusion was \citet{Abozaid2024}'s study where they developed a model to recognize faces with face masks. Two fusions were used, which are the feature-level fusion and the score fusion to learn between the original face and the masked face.
 
-\citet{Skowron2016} further refined multimodal approaches by integrating linguistic, visual, and metadata features from Twitter and Instagram. Their study incorporated LIWC for linguistic analysis and emotion detection techniques from Machajdik and Hanbury (2010) to extract visual features. Their findings demonstrated that cross-platform personality modeling improved accuracy, emphasizing that personality traits manifest differently across different social networks.
-
-Advancements in machine learning-based personality prediction have allowed researchers to refine image and text-based multimodal models for social media applications. \citet{Ferwerda2018} developed a personality recognition model based on Instagram images, utilizing the Google Vision API for image content extraction and a ZeroR classifier for baseline evaluation. Their results indicated that image aesthetics and content types strongly correlate with personality traits, particularly in openness and extraversion classification.
-
-Similarly, \citet{Batrinca2016} examined multimodal cues in team-based interactions, incorporating speech, body movements, and facial expressions to model collaborative personality traits. Their study used Hidden Markov Models (HMMs) and SVMs, demonstrating that nonverbal behavior plays a significant role in personality assessments within group settings.
-
-\citet{Branz2020} refined the image-based personality recognition model by analyzing color preferences in Instagram photos. Their study confirmed that specific color choices (e.g., dominant red hues) correlated with openness, while blue hues were linked to conscientiousness. The study utilized k-Nearest Neighbors (k-NN) and SVMs, establishing a connection between color psychology and personality traits in digital environments.
-
-The latest advancements in multimodal APR have shifted toward deep learning-based models, with an emphasis on personalization and adaptive AI techniques. \citet{Salam2022} introduced a personalized personality prediction model, utilizing Neural Architecture Search (NAS) to optimize Deep Neural Networks (DNNs) for different user demographics. Their study found that customized models outperformed generic APR models, reinforcing the importance of personalization in AI-driven personality recognition.
-
-Building on deep learning methodologies, \citet{Lima2022} leveraged sequential data modeling to improve real-time personality prediction. Their model incorporated Long Short-Term Memory (LSTM) networks, demonstrating that capturing temporal dependencies enhances classification accuracy. Their research concluded that personality traits are not static but evolve based on user interactions, emphasizing the potential of adaptive AI-driven personality assessments.
-
+Each study demonstrated the different strengths of the feature-level fusion and the decision-level fusion.
 
 \section{Filipino APR}
 \label{sec: FilipinoAPR}
